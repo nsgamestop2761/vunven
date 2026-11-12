@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vun Vén — Mua đúng đồ, cho đúng người</title>
+<meta name="description" content="Gợi ý sản phẩm theo từng nhu cầu: mẹ bỉm sữa, dân khởi nghiệp, văn phòng, sinh viên, gymer... kèm review chi tiết.">
+<meta property="og:title" content="Vun Vén — Mua đúng đồ, cho đúng người">
+<meta property="og:description" content="Bạn là mẹ bỉm, founder hay sinh viên? Chọn đúng nhóm, tụi mình gợi ý đúng món.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="./" class="logo"><b>🌱</b>Vun Vén</a>
+    <nav class="nav">
+      <a href="#chon">Chọn theo nhu cầu</a>
+      <a href="#review">Review</a>
+      <a href="#cach-chon">Cách tụi mình chọn</a>
+      <a href="#chon" class="cta">Tìm đồ cho tui →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="pill"><span>MỚI</span> 50+ món tuyển chọn cho 10 kiểu người</div>
+      <h1>Mua <span class="mark">đúng đồ</span>,<br>cho <span class="grad">đúng người.</span></h1>
+      <p class="lead">Mẹ bỉm cần rảnh tay, founder cần tăng tốc, sinh viên cần ngon-bổ-rẻ. Chọn nhóm của bạn — tụi mình gợi ý đúng món, kèm review thật lòng.</p>
+      <div class="btns">
+        <a href="#chon" class="btn btn-primary">Bạn thuộc nhóm nào? 👇</a>
+        <a href="#review" class="btn btn-ghost">Đọc review ⭐</a>
+      </div>
+      <div class="stats">
+        <div><strong>10</strong>nhóm nhu cầu</div>
+        <div><strong>50+</strong>sản phẩm chọn lọc</div>
+        <div><strong>0đ</strong>phí cho bạn</div>
+      </div>
+    </div>
+    <div class="hero-art" id="heroArt">
+      <div class="blob"></div>
+      <div class="blob-center">🛍️</div>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true"><div id="marquee"></div></div>
+</section>
+
+<section id="chon">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">Bước 1 · Chọn nhóm của bạn</div>
+        <h2>Bạn là ai? 👀</h2>
+      </div>
+      <p>Mỗi nhóm có bộ đồ riêng, được xếp theo mức độ “nên mua trước”. Có thể gửi link nhóm cho bạn bè luôn nha.</p>
+    </div>
+    <div class="personas" id="personas" role="tablist"></div>
+    <div class="panel" id="panel" role="tabpanel"></div>
+  </div>
+</section>
+
+<section id="review" class="reviews-bg">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">Review chi tiết</div>
+        <h2>Dùng thật, chấm thật ⭐</h2>
+      </div>
+      <p>Không copy mô tả shop. Mỗi bài đều có ưu – nhược điểm, ai nên mua và ai <b>không</b> nên mua.</p>
+    </div>
+    <div class="reviews" id="reviews"></div>
+  </div>
+</section>
+
+<section id="cach-chon">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">Minh bạch</div>
+        <h2>Cách tụi mình chọn đồ</h2>
+      </div>
+    </div>
+    <div class="how">
+      <div class="step"><b>🔍</b><h3>Bắt đầu từ con người</h3><p>Không hỏi “món nào hot”, mà hỏi “người này đang mệt chuyện gì”. Đồ được chọn để giải quyết đúng nỗi đau đó.</p></div>
+      <div class="step"><b>🧪</b><h3>Lọc kỹ đánh giá</h3><p>Ưu tiên shop Mall / chính hãng, đánh giá 4.5★ trở lên, đọc kỹ review 1–2 sao để biết điểm yếu thật.</p></div>
+      <div class="step"><b>💸</b><h3>Đáng đồng tiền</h3><p>Mỗi nhóm có đủ món dưới 500k đến món đầu tư. Bạn lọc theo ngân sách, mua cái cần trước.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-box">
+      <div>
+        <h2>Săn deal cùng Vun Vén 🔔</h2>
+        <p>Mỗi tuần một email: deal tốt nhất của từng nhóm + review mới. Không spam, huỷ lúc nào cũng được.</p>
+      </div>
+      <div>
+        <form class="form" id="subForm">
+          <input type="email" placeholder="Email của bạn" required aria-label="Email">
+          <button class="btn btn-primary" type="submit">Đăng ký</button>
+        </form>
+        <div class="form-note">* Gắn form này với Mailchimp / Google Form khi bạn sẵn sàng.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="disclosure"><b>📢 Minh bạch tiếp thị liên kết:</b> Một số liên kết trên trang là link affiliate. Khi bạn mua qua link, Vun Vén có thể nhận hoa hồng nhỏ từ sàn — <b>bạn không phải trả thêm đồng nào</b>. Giá hiển thị là giá tham khảo, có thể thay đổi theo thời điểm.</div>
+    <div class="foot">
+      <div><b style="color:var(--ink)">🌱 Vun Vén</b> · Mua đúng đồ, cho đúng người.</div>
+      <div>© 2026 Vun Vén</div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
