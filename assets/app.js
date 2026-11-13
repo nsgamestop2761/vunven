@@ -32,9 +32,8 @@ PERSONAS.forEach(per => per.products.forEach(p => {
   if (live) {
     p.prices = { ...(p.prices || {}) }; p.link = { ...(p.link || {}) };
     let maxOld = 0;
-    for (const [k, v] of Object.entries(live)) { if (v.price) p.prices[k] = v.price; if (v.link) p.link[k] = v.link; if (v.old) maxOld = Math.max(maxOld, v.old); }
+    for (const [k, v] of Object.entries(live)) { if (v.price) { p.prices[k] = v.price; p.live = true; } if (v.link) p.link[k] = v.link; if (v.old) maxOld = Math.max(maxOld, v.old); }
     if (maxOld) p.oldPrice = maxOld;
-    p.live = true;
   }
   const offers = Object.entries(p.prices || {}).filter(([k, v]) => v && p.link && p.link[k]).sort((a, b) => a[1] - b[1]);
   p.offers = offers;

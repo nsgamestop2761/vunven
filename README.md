@@ -51,6 +51,13 @@ Có giá mới → file `assets/prices.js` được lưu lên GitHub → Cloudfl
    (bỏ trống thì script tự tìm chiến dịch Shopee/Lazada bạn đã được duyệt).
 4. Tab **Actions → Cập nhật giá tự động → Run workflow** để chạy thử ngay.
 
-Chạy thử trên máy: `ACCESSTRADE_TOKEN=xxx node scripts/update-prices.mjs --dry`
+Chạy thử trên máy: `ACCESSTRADE_TOKEN=xxx node scripts/update-prices.mjs --dry` (thêm `--only=may-hut-sua` để thử 1 món)
+
+**Đã kiểm tra với tài khoản AccessTrade thật (14/11/2026):**
+| Sàn | Giá tự động | Link affiliate tự tạo |
+|---|---|---|
+| Shopee | ✅ nếu sản phẩm có trong datafeed của AccessTrade (khoảng 12.700 sp) — muốn đủ hết thì thêm `SHOPEE_APP_ID/SECRET` | ✅ |
+| TikTok Shop | ✅ | ✅ |
+| Lazada | ⚠️ datafeed Lazada trên AccessTrade rất cũ (2021) nên script bỏ qua, **giữ giá nhập tay** | ✅ |
 Món nào API không lấy được giá thì trang vẫn dùng giá nhập tay trong `assets/data.js`.
 Lưu ý: lịch chạy tự động của GitHub chỉ chạy trên **nhánh mặc định** của repo.
