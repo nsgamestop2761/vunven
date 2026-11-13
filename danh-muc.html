@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<title>Danh mục — Vun Vén</title>
+</head>
+<body data-page="listing">
+<div id="site-header"></div>
+<main class="wrap">
+  <div class="crumbs"><a href="./">Trang chủ</a> › <span id="crumbName">Tất cả</span></div>
+  <div class="list-head" id="listHead"></div>
+  <div class="list-body">
+    <aside class="filters" id="filters" aria-label="Bộ lọc"></aside>
+    <div>
+      <div class="toolbar">
+        <div style="display:flex;gap:12px;align-items:center">
+          <button class="btn ftoggle" id="ftoggle" type="button" style="height:38px;padding:0 16px">Bộ lọc</button>
+          <span id="resultCount"></span>
+        </div>
+        <label>Sắp xếp:
+          <select id="sort">
+            <option value="rel">Phù hợp nhất</option>
+            <option value="pop">Nhiều đánh giá nhất</option>
+            <option value="rate">Điểm cao nhất</option>
+            <option value="low">Giá thấp đến cao</option>
+            <option value="high">Giá cao đến thấp</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid g4" id="listGrid"></div>
+    </div>
+  </div>
+</main>
+<div id="site-footer"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

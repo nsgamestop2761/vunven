@@ -1,33 +1,30 @@
-# 🌱 Vun Vén — trang affiliate "Mua đúng đồ, cho đúng người"
+# Vun Vén — trang affiliate "Đồ tốt, chọn đúng cho từng người"
 
-Site tĩnh (HTML/CSS/JS thuần, không cần build) gợi ý sản phẩm theo **10 nhóm người dùng**:
-Mẹ bỉm sữa · Dân khởi nghiệp · Dân văn phòng · Sinh viên/Gen Z · Gymer · Tín đồ skincare ·
-Mới ra ở riêng · Dân xê dịch · Game thủ · Quà biếu bố mẹ — kèm **3 bài review mẫu**.
+Site tĩnh (HTML/CSS/JS thuần, không cần build) theo phong cách sàn TMĐT: thanh tìm kiếm,
+danh mục tròn, lưới sản phẩm có ảnh, giá, % giảm, sao, nút lưu (♡), trang danh mục có bộ lọc
+và trang review dạng trang chi tiết sản phẩm.
 
-## Cấu trúc
+10 nhóm nhu cầu: Mẹ bỉm sữa · Dân khởi nghiệp · Dân văn phòng · Sinh viên/Gen Z · Gymer ·
+Tín đồ skincare · Mới ra ở riêng · Dân xê dịch · Game thủ · Quà biếu bố mẹ — 50 sản phẩm, 3 bài review mẫu.
+
+## Các trang
 
 | File | Nội dung |
 |---|---|
-| `index.html` | Trang chủ: hero, chọn nhóm, lọc theo ngân sách, danh sách review |
-| `review.html` | Trang review chi tiết (`review.html?id=may-hut-sua`) |
-| `assets/data.js` | **Toàn bộ sản phẩm, giá, link affiliate và bài review — chỉ cần sửa file này** |
-| `assets/style.css` | Giao diện |
-| `assets/app.js`, `assets/review.js` | Hiển thị dữ liệu |
+| `index.html` | Trang chủ: danh mục tròn, mua theo nhu cầu, bán chạy, giảm sâu, review |
+| `danh-muc.html` | Trang danh mục + bộ lọc (`?nhom=me-bim`, `?q=tai nghe`, `?saved=1`) |
+| `review.html` | Bài review dạng trang sản phẩm (`?id=may-hut-sua`) |
+| `assets/data.js` | **Toàn bộ sản phẩm, giá, link affiliate, bài review — chỉ cần sửa file này** |
+| `assets/img/` | Ảnh minh hoạ (Unsplash, dùng miễn phí) |
 
-## Thay link affiliate
+## Trước khi đăng
 
-Mở `assets/data.js`, tìm `link: { shopee: "#", lazada: "#", tiktok: "#" }` và dán link của bạn.
-Để `""` thì nút sàn đó tự ẩn.
+1. **Link affiliate:** trong `assets/data.js`, thay các `"#"` trong `link: { shopee, lazada, tiktok }`. Để `""` thì sàn đó tự ẩn.
+2. **Ảnh:** ảnh hiện tại là ảnh minh hoạ. Nên thay bằng ảnh sản phẩm thật: bỏ file vào `assets/img/` rồi đổi `img`, hoặc dán thẳng URL ảnh vào `img`.
+3. **Số liệu:** giá, giá gốc, số sao, số lượt đánh giá đang là **số mẫu** — thay bằng số thật trên sàn.
+4. **Review:** 3 bài review là bài mẫu, hãy viết lại bằng trải nghiệm thật.
+5. **Ô đăng ký email** chưa lưu dữ liệu — gắn với Mailchimp / Google Form khi cần.
 
-## Thêm nhóm / sản phẩm / review
+## Đăng lên mạng
 
-- Thêm nhóm: copy một object trong `PERSONAS` và đổi `id`, `name`, `emoji`, `color`...
-- Thêm review: copy một object trong `REVIEWS`, rồi gắn `review: "<id>"` vào sản phẩm tương ứng.
-- Link chia sẻ từng nhóm: `https://<site>/#me-bim`, `#khoi-nghiep`, `#sinh-vien`...
-
-## Xem thử & đăng lên mạng
-
-- Xem trên máy: mở `index.html` bằng trình duyệt.
-- GitHub Pages: Settings → Pages → Deploy from branch → chọn branch & thư mục `/ (root)`.
-
-> ⚠️ Giá trong data là giá tham khảo, các bài review là **bài mẫu** — nhớ thay bằng trải nghiệm thật trước khi đăng.
+GitHub Pages: Settings → Pages → Deploy from branch → chọn branch & thư mục `/ (root)`.

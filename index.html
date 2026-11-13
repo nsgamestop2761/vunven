@@ -3,126 +3,89 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vun Vén — Mua đúng đồ, cho đúng người</title>
-<meta name="description" content="Gợi ý sản phẩm theo từng nhu cầu: mẹ bỉm sữa, dân khởi nghiệp, văn phòng, sinh viên, gymer... kèm review chi tiết.">
-<meta property="og:title" content="Vun Vén — Mua đúng đồ, cho đúng người">
-<meta property="og:description" content="Bạn là mẹ bỉm, founder hay sinh viên? Chọn đúng nhóm, tụi mình gợi ý đúng món.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<title>Vun Vén — Đồ tốt, chọn đúng cho từng người</title>
+<meta name="description" content="Gợi ý sản phẩm theo nhu cầu: mẹ bỉm sữa, dân khởi nghiệp, văn phòng, sinh viên, gymer… kèm review chi tiết và link mua trên Shopee, Lazada, TikTok Shop.">
+<meta property="og:title" content="Vun Vén — Đồ tốt, chọn đúng cho từng người">
+<meta property="og:image" content="assets/img/hero-1.jpg">
 </head>
-<body>
+<body data-page="home">
+<div id="site-header"></div>
 
-<header class="top">
+<section class="welcome">
   <div class="wrap">
-    <a href="./" class="logo"><b>🌱</b>Vun Vén</a>
-    <nav class="nav">
-      <a href="#chon">Chọn theo nhu cầu</a>
-      <a href="#review">Review</a>
-      <a href="#cach-chon">Cách tụi mình chọn</a>
-      <a href="#chon" class="cta">Tìm đồ cho tui →</a>
-    </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="wrap">
-    <div>
-      <div class="pill"><span>MỚI</span> 50+ món tuyển chọn cho 10 kiểu người</div>
-      <h1>Mua <span class="mark">đúng đồ</span>,<br>cho <span class="grad">đúng người.</span></h1>
-      <p class="lead">Mẹ bỉm cần rảnh tay, founder cần tăng tốc, sinh viên cần ngon-bổ-rẻ. Chọn nhóm của bạn — tụi mình gợi ý đúng món, kèm review thật lòng.</p>
-      <div class="btns">
-        <a href="#chon" class="btn btn-primary">Bạn thuộc nhóm nào? 👇</a>
-        <a href="#review" class="btn btn-ghost">Đọc review ⭐</a>
-      </div>
-      <div class="stats">
-        <div><strong>10</strong>nhóm nhu cầu</div>
-        <div><strong>50+</strong>sản phẩm chọn lọc</div>
-        <div><strong>0đ</strong>phí cho bạn</div>
-      </div>
-    </div>
-    <div class="hero-art" id="heroArt">
-      <div class="blob"></div>
-      <div class="blob-center">🛍️</div>
-    </div>
-  </div>
-  <div class="marquee" aria-hidden="true"><div id="marquee"></div></div>
-</section>
-
-<section id="chon">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">Bước 1 · Chọn nhóm của bạn</div>
-        <h2>Bạn là ai? 👀</h2>
-      </div>
-      <p>Mỗi nhóm có bộ đồ riêng, được xếp theo mức độ “nên mua trước”. Có thể gửi link nhóm cho bạn bè luôn nha.</p>
-    </div>
-    <div class="personas" id="personas" role="tablist"></div>
-    <div class="panel" id="panel" role="tabpanel"></div>
+    <h1>Đồ tốt, chọn đúng cho từng người.</h1>
+    <p class="sub">Bạn là mẹ bỉm, founder hay sinh viên? Chọn nhóm của bạn để xem những món đáng mua nhất.</p>
+    <div class="circles" id="circles"></div>
   </div>
 </section>
 
-<section id="review" class="reviews-bg">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">Review chi tiết</div>
-        <h2>Dùng thật, chấm thật ⭐</h2>
-      </div>
-      <p>Không copy mô tả shop. Mỗi bài đều có ưu – nhược điểm, ai nên mua và ai <b>không</b> nên mua.</p>
+<main>
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-title"><div><h2>Mua theo nhu cầu</h2><p>Mỗi nhóm 5 món, xếp theo thứ tự nên mua trước.</p></div></div>
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <div class="need-intro" id="needIntro"></div>
+      <div class="grid" id="needGrid"></div>
     </div>
-    <div class="reviews" id="reviews"></div>
-  </div>
-</section>
+  </section>
 
-<section id="cach-chon">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">Minh bạch</div>
-        <h2>Cách tụi mình chọn đồ</h2>
-      </div>
+  <section class="sec" style="padding-top:8px">
+    <div class="wrap promos">
+      <a class="promo" href="danh-muc.html?nhom=o-rieng">
+        <div class="txt">
+          <small>Bộ sưu tập</small>
+          <h3>Mới ra ở riêng? Sắm đủ cho căn phòng đầu tiên</h3>
+          <p>Robot hút bụi, máy pha cà phê, chén sứ… những món "một vốn bốn lời".</p>
+          <span class="btn">Xem bộ sưu tập</span>
+        </div>
+        <img src="assets/img/hero-1.jpg" alt="Phòng khách ấm cúng" loading="lazy">
+      </a>
+      <a class="promo alt" href="danh-muc.html?nhom=du-lich">
+        <img src="assets/img/hero-2.jpg" alt="Người đang chờ chuyến bay ở sân bay" loading="lazy">
+        <div class="txt">
+          <small>Mùa du lịch cuối năm</small>
+          <h3>Đi nhẹ, đi xa, đi đâu cũng đẹp</h3>
+          <span class="btn">Đồ cho dân xê dịch</span>
+        </div>
+      </a>
     </div>
-    <div class="how">
-      <div class="step"><b>🔍</b><h3>Bắt đầu từ con người</h3><p>Không hỏi “món nào hot”, mà hỏi “người này đang mệt chuyện gì”. Đồ được chọn để giải quyết đúng nỗi đau đó.</p></div>
-      <div class="step"><b>🧪</b><h3>Lọc kỹ đánh giá</h3><p>Ưu tiên shop Mall / chính hãng, đánh giá 4.5★ trở lên, đọc kỹ review 1–2 sao để biết điểm yếu thật.</p></div>
-      <div class="step"><b>💸</b><h3>Đáng đồng tiền</h3><p>Mỗi nhóm có đủ món dưới 500k đến món đầu tư. Bạn lọc theo ngân sách, mua cái cần trước.</p></div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-title"><div><h2>Bán chạy nhất</h2><p>Những món được nhiều người mua và đánh giá tốt nhất.</p></div><a href="danh-muc.html">Xem tất cả</a></div>
+      <div class="grid" id="bestGrid"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section style="padding-top:0">
-  <div class="wrap">
-    <div class="cta-box">
-      <div>
-        <h2>Săn deal cùng Vun Vén 🔔</h2>
-        <p>Mỗi tuần một email: deal tốt nhất của từng nhóm + review mới. Không spam, huỷ lúc nào cũng được.</p>
-      </div>
-      <div>
-        <form class="form" id="subForm">
-          <input type="email" placeholder="Email của bạn" required aria-label="Email">
-          <button class="btn btn-primary" type="submit">Đăng ký</button>
-        </form>
-        <div class="form-note">* Gắn form này với Mailchimp / Google Form khi bạn sẵn sàng.</div>
-      </div>
+  <section class="sec" style="padding-top:8px">
+    <div class="wrap">
+      <div class="sec-title"><div><h2>Đang giảm sâu</h2><p>Giảm nhiều nhất so với giá gốc — nên xem trước khi hết voucher.</p></div></div>
+      <div class="grid" id="dealGrid"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <div class="wrap">
-    <div class="disclosure"><b>📢 Minh bạch tiếp thị liên kết:</b> Một số liên kết trên trang là link affiliate. Khi bạn mua qua link, Vun Vén có thể nhận hoa hồng nhỏ từ sàn — <b>bạn không phải trả thêm đồng nào</b>. Giá hiển thị là giá tham khảo, có thể thay đổi theo thời điểm.</div>
-    <div class="foot">
-      <div><b style="color:var(--ink)">🌱 Vun Vén</b> · Mua đúng đồ, cho đúng người.</div>
-      <div>© 2026 Vun Vén</div>
+  <section class="sec editorial" id="review">
+    <div class="wrap">
+      <div class="sec-title"><div><h2>Review mới nhất</h2><p>Dùng thật rồi mới viết: ưu, nhược và ai không nên mua.</p></div></div>
+      <div class="posts" id="posts"></div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<div class="toast" id="toast"></div>
+  <section class="sec" id="cach-chon">
+    <div class="wrap trust">
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5" stroke-linecap="round"/></svg><h3>Ưu tiên shop chính hãng</h3><p>Chọn Mall / shop chính hãng, đánh giá từ 4,5 sao và đọc kỹ cả review 1–2 sao.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><h3>Bắt đầu từ con người</h3><p>Không hỏi “món nào hot”, mà hỏi “người này đang mệt chuyện gì” rồi mới chọn đồ.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg><h3>Bạn không trả thêm</h3><p>Link affiliate không làm tăng giá. Tụi mình nhận hoa hồng nhỏ từ sàn để duy trì trang.</p></div>
+    </div>
+  </section>
+</main>
 
+<div id="site-footer"></div>
 <script src="assets/data.js"></script>
 <script src="assets/app.js"></script>
 </body>
