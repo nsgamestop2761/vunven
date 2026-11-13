@@ -24,8 +24,18 @@ const mfmt = n => n >= 1e6 ? (n / 1e6).toFixed(n % 1e6 ? 1 : 0).replace(".", ","
 const kfmt = n => n >= 1000 ? (n / 1000).toFixed(1).replace(".", ",").replace(",0", "") + "k" : String(n);
 const off = p => p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
 const starHTML = (r, cls = "") => `<span class="stars ${cls}" aria-label="${r} trên 5 sao"><i style="width:${r / 5 * 100}%"></i></span>`;
-/* Tính giá rẻ nhất từ bảng giá từng sàn */
+/* Giá tự động (assets/prices.js, do GitHub Actions cập nhật) đè lên giá nhập tay */
+const LIVE = (typeof window !== "undefined" && window.LIVE_PRICES) || { items: {} };
+const UPDATED_AT = LIVE.updatedAt ? (() => { const [d, t] = LIVE.updatedAt.split("T"); const [y, m, dd] = d.split("-"); return `${t.slice(0, 5)} ${dd}/${m}/${y}`; })() : PRICE_UPDATED;
 PERSONAS.forEach(per => per.products.forEach(p => {
+  const live = LIVE.items && LIVE.items[p.id];
+  if (live) {
+    p.prices = { ...(p.prices || {}) }; p.link = { ...(p.link || {}) };
+    let maxOld = 0;
+    for (const [k, v] of Object.entries(live)) { if (v.price) p.prices[k] = v.price; if (v.link) p.link[k] = v.link; if (v.old) maxOld = Math.max(maxOld, v.old); }
+    if (maxOld) p.oldPrice = maxOld;
+    p.live = true;
+  }
   const offers = Object.entries(p.prices || {}).filter(([k, v]) => v && p.link && p.link[k]).sort((a, b) => a[1] - b[1]);
   p.offers = offers;
   if (offers.length) { p.price = offers[0][1]; p.bestShop = offers[0][0]; p.maxPrice = offers[offers.length - 1][1]; }
@@ -90,7 +100,7 @@ function productCard(p) {
 function compareTable(p) {
   return `
   <div class="cmp-table">
-    <div class="cmp-h"><b>${ICON.scale} So giá ${p.offers.length} sàn</b><span>Cập nhật ${PRICE_UPDATED}</span></div>
+    <div class="cmp-h"><b>${ICON.scale} So giá ${p.offers.length} sàn</b><span>${p.live ? "Tự cập nhật" : "Cập nhật"} ${UPDATED_AT}</span></div>
     ${p.offers.map(([k, v], i) => `
     <a class="cmp-row ${i === 0 ? "best" : ""}" href="${esc(p.link[k])}" ${EXT}>
       <span class="sn">${SHOPS[k].name}${i === 0 && p.offers.length > 1 ? `<em>Rẻ nhất</em>` : ""}${p.notes && p.notes[k] ? `<small>${esc(p.notes[k])}</small>` : ""}</span>

@@ -1,0 +1,39 @@
+name: Cập nhật giá tự động
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"   # mỗi 6 tiếng (giờ UTC)
+  workflow_dispatch: {}      # cho phép bấm chạy tay trong tab Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cap-nhat-gia
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Lấy giá mới
+        run: node scripts/update-prices.mjs
+        env:
+          ACCESSTRADE_TOKEN: ${{ secrets.ACCESSTRADE_TOKEN }}
+          SHOPEE_APP_ID: ${{ secrets.SHOPEE_APP_ID }}
+          SHOPEE_APP_SECRET: ${{ secrets.SHOPEE_APP_SECRET }}
+          AT_CAMPAIGN_SHOPEE: ${{ vars.AT_CAMPAIGN_SHOPEE }}
+          AT_CAMPAIGN_LAZADA: ${{ vars.AT_CAMPAIGN_LAZADA }}
+      - name: Lưu nếu giá thay đổi
+        run: |
+          if git diff --quiet -- assets/prices.js; then echo "Giá không đổi."; exit 0; fi
+          git config user.name "vunven-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/prices.js
+          git commit -m "Cập nhật giá tự động"
+          git push

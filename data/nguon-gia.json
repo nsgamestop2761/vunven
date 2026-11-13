@@ -1,0 +1,303 @@
+{
+  "_huong_dan": "Dán link sản phẩm GỐC trên từng sàn (copy từ thanh địa chỉ hoặc nút Chia sẻ). Để trống nếu không bán ở sàn đó. Script tự lấy giá + tạo link affiliate.",
+  "may-hut-sua": {
+    "ten": "Máy hút sữa điện đôi không dây, 9 mức lực hút",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "body-gau": {
+    "ten": "Bộ body liền thân lót nỉ hình gấu cho bé 0–24 tháng",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "chan-u": {
+    "ten": "Chăn ủ sơ sinh sợi tre siêu mềm 2 lớp",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "do-choi": {
+    "ten": "Set đồ chơi phát triển giác quan cho bé 6–18 tháng",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "kem-ran": {
+    "ten": "Kem dưỡng ngừa rạn da cho mẹ bầu & sau sinh 150ml",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "chong-nang": {
+    "ten": "Kem chống nắng phổ rộng SPF50+ PA++++, kết cấu sữa",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "serum": {
+    "ten": "Serum Vitamin C 15% sáng da, mờ thâm 30ml",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "toner": {
+    "ten": "Nước cân bằng không cồn cho da nhạy cảm 200ml",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "trang-diem": {
+    "ten": "Bộ cọ trang điểm 8 cây lông mềm kèm túi",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "dau-duong": {
+    "ten": "Dầu dưỡng da mặt chiết xuất thực vật 30ml",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "hoa-cuoi": {
+    "ten": "Hoa cưới cầm tay hoa lụa cao cấp tông hồng pastel",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "nhan-cuoi": {
+    "ten": "Cặp nhẫn cưới vàng 14K trơn, khắc tên miễn phí",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "bong-tai": {
+    "ten": "Bông tai bạc 925 đính đá xanh cho cô dâu",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "giay-cuoi": {
+    "ten": "Giày cao gót mũi nhọn 7cm êm chân cho tiệc cưới",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "nen-thom": {
+    "ten": "Set nến thơm sáp đậu nành trang trí phòng tân hôn",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "massage": {
+    "ten": "Máy massage cổ vai gáy xung điện, có chườm ấm",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "den-ban": {
+    "ten": "Đèn bàn kim loại phong cách Bắc Âu, bóng E27",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "binh-nuoc": {
+    "ten": "Bình giữ nhiệt inox 316 dung tích 750ml, sơn nhám",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "coc-su": {
+    "ten": "Cốc sứ trắng 350ml có nắp, dùng được lò vi sóng",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "ban-phim": {
+    "ten": "Bàn phím không dây mỏng, kết nối 3 thiết bị",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "robot": {
+    "ten": "Robot hút bụi lau nhà, bản đồ LiDAR, điều khiển qua app",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "may-xay": {
+    "ten": "Máy xay sinh tố cối thủy tinh 1.5L, 6 lưỡi",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "ca-phe": {
+    "ten": "Máy pha cà phê espresso mini kèm máy xay",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "bat-su": {
+    "ten": "Bộ 6 chén sứ men mộc phong cách tối giản",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "den-ngu": {
+    "ten": "Đèn ngủ đầu giường bóng tròn dây tóc, chân kim loại",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "huyet-ap": {
+    "ten": "Máy đo huyết áp bắp tay, màn hình số lớn có giọng đọc",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "tra": {
+    "ten": "Hộp quà trà thảo mộc 6 vị, túi lọc tiện dụng",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "am": {
+    "ten": "Ấm đun nước inox 304 dùng bếp từ 3L",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "dong-ho-treo": {
+    "ten": "Đồng hồ treo tường số lớn, kim trôi không tiếng",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "hop-qua": {
+    "ten": "Hộp quà Tết tự chọn: hạt, trà, mứt cao cấp",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "tai-nghe-anc": {
+    "ten": "Tai nghe true wireless chống ồn ANC, pin 30 giờ",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "noi-mini": {
+    "ten": "Nồi điện mini đa năng 1.5L: nấu, lẩu, hấp",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "den-hoc": {
+    "ten": "Đèn học LED chống cận, kẹp bàn, 3 chế độ màu",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "cu-sac": {
+    "ten": "Củ sạc nhanh GaN 65W, 3 cổng, sạc được laptop",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "balo": {
+    "ten": "Balo laptop 15.6 inch chống nước, ngăn chống sốc",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "dong-ho": {
+    "ten": "Đồng hồ thông minh đo nhịp tim, SpO2, pin 10 ngày",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "ta-tay": {
+    "ten": "Bộ tạ tay bọc cao su 2×3kg + dây kháng lực",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "tham-yoga": {
+    "ten": "Thảm yoga TPE dày 8mm, 2 mặt chống trơn",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "binh-lac": {
+    "ten": "Bình lắc whey 700ml có lò xo, ngăn đựng bột",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "giay": {
+    "ten": "Giày tập gym đế bằng, đế cao su chống trượt",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "vali": {
+    "ten": "Vali khung nhôm 20 inch xách tay, khoá TSA",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "balo-trek": {
+    "ten": "Balo trekking 40L chống nước, có áo mưa",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "vi-ho-chieu": {
+    "ten": "Ví đựng hộ chiếu chống quét RFID, da PU",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "kinh-ram": {
+    "ten": "Kính râm phân cực chống UV400 gọng vuông",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "may-anh": {
+    "ten": "Máy ảnh mirrorless cho người mới kèm lens kit",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "ghe-cong-thai-hoc": {
+    "ten": "Ghế công thái học lưới, tựa đầu & tay vịn 4D",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "man-hinh": {
+    "ten": "Màn hình 27 inch 2K IPS, viền mỏng 3 cạnh",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "gia-laptop": {
+    "ten": "Giá đỡ laptop nhôm nguyên khối, chỉnh 6 nấc",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "so-tay": {
+    "ten": "Sổ kế hoạch OKR 12 tuần, bìa da, giấy 100gsm",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  },
+  "sach": {
+    "ten": "Combo sách khởi nghiệp: Zero to One, Khởi nghiệp tinh gọn…",
+    "shopee": "",
+    "lazada": "",
+    "tiktok": ""
+  }
+}

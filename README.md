@@ -35,3 +35,22 @@ Tín đồ skincare · Cô dâu sắp cưới · Mới ra ở riêng · Dân xê
 ## Đăng lên mạng
 
 GitHub Pages: Settings → Pages → Deploy from branch → chọn branch & thư mục `/ (root)`.
+
+## Tự động cập nhật giá (AccessTrade / Shopee API)
+
+Giá và link affiliate được cập nhật **6 tiếng một lần** bằng GitHub Actions (`.github/workflows/cap-nhat-gia.yml`).
+Có giá mới → file `assets/prices.js` được lưu lên GitHub → Cloudflare Pages tự cập nhật trang.
+
+**Thiết lập một lần:**
+1. Mở `data/nguon-gia.json`, dán **link sản phẩm gốc** trên Shopee / Lazada / TikTok Shop cho từng món
+   (Shopee nên dùng link đầy đủ dạng `...-i.123456.789012`). Không bán ở sàn nào thì để trống.
+2. GitHub → repo → **Settings → Secrets and variables → Actions → New repository secret**:
+   - `ACCESSTRADE_TOKEN`: Access key lấy ở pub.accesstrade.vn → Tài khoản → Profile.
+   - (tuỳ chọn) `SHOPEE_APP_ID`, `SHOPEE_APP_SECRET`: nếu có quyền Shopee Affiliate Open API.
+3. (tuỳ chọn) Tab **Variables**: `AT_CAMPAIGN_SHOPEE`, `AT_CAMPAIGN_LAZADA` = campaign_id trên AccessTrade
+   (bỏ trống thì script tự tìm chiến dịch Shopee/Lazada bạn đã được duyệt).
+4. Tab **Actions → Cập nhật giá tự động → Run workflow** để chạy thử ngay.
+
+Chạy thử trên máy: `ACCESSTRADE_TOKEN=xxx node scripts/update-prices.mjs --dry`
+Món nào API không lấy được giá thì trang vẫn dùng giá nhập tay trong `assets/data.js`.
+Lưu ý: lịch chạy tự động của GitHub chỉ chạy trên **nhánh mặc định** của repo.
