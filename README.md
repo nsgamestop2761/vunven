@@ -1,5 +1,7 @@
-# Vun Vén — trang affiliate "Đồ tốt, chọn đúng cho từng người"
+# Vun Vén — "Mua ít hơn, mua đúng hơn"
 
+Trang gợi ý mua sắm theo tinh thần **vun vén / tiết kiệm**: mỗi nhóm chỉ 5 món cần thiết xếp theo ưu tiên,
+kèm danh sách "Đừng phí tiền vào…", ngân sách gợi ý, mẹo mua rẻ hơn và so giá 3 sàn.
 Site tĩnh (HTML/CSS/JS thuần, không cần build) theo phong cách sàn TMĐT: thanh tìm kiếm,
 danh mục tròn, lưới sản phẩm có ảnh, giá, % giảm, sao, nút lưu (♡), trang danh mục có bộ lọc
 và trang review dạng trang chi tiết sản phẩm.
@@ -22,7 +24,8 @@ Tín đồ skincare · Cô dâu sắp cưới · Mới ra ở riêng · Dân xê
 1. **Link affiliate:** trong `assets/data.js`, thay các `"#"` trong `link: { shopee, lazada, tiktok }`. Để `""` thì sàn đó tự ẩn.
 2. **Ảnh:** ảnh hiện tại là ảnh minh hoạ. Nên thay bằng ảnh sản phẩm thật: bỏ file vào `assets/img/` rồi đổi `img`, hoặc dán thẳng URL ảnh vào `img`.
 3. **Số liệu:** giá, giá gốc, số sao, số lượt đánh giá đang là **số mẫu** — thay bằng số thật trên sàn.
-4. **Review:** 3 bài review là bài mẫu, hãy viết lại bằng trải nghiệm thật.
+4. **Review:** 3 bài review là bài mẫu, hãy viết lại bằng trải nghiệm thật (kể cả mục `saveTips` — mẹo mua rẻ hơn).
+   Danh sách "Đừng phí tiền vào…" của từng nhóm nằm ở trường `skip` trong `assets/data.js`.
 5. **Ô đăng ký email** chưa lưu dữ liệu — gắn với Mailchimp / Google Form khi cần.
 
 ## Đăng lên mạng

@@ -7,9 +7,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
-<title>Vun Vén — Đồ tốt, chọn đúng cho từng người</title>
-<meta name="description" content="Gợi ý sản phẩm theo nhu cầu: mẹ bỉm sữa, dân khởi nghiệp, văn phòng, sinh viên, gymer… kèm review chi tiết và link mua trên Shopee, Lazada, TikTok Shop.">
-<meta property="og:title" content="Vun Vén — Đồ tốt, chọn đúng cho từng người">
+<title>Vun Vén — Mua ít hơn, mua đúng hơn</title>
+<meta name="description" content="Vun Vén giúp bạn mua ít mà chất: chọn đúng món cần cho mẹ bỉm, cô dâu, nàng công sở…, so giá Shopee, Lazada, TikTok Shop và chỉ ra cả những món không cần mua.">
+<meta property="og:title" content="Vun Vén — Mua ít hơn, mua đúng hơn">
 <meta property="og:image" content="assets/img/hero-1.jpg">
 </head>
 <body data-page="home">
@@ -18,16 +18,16 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-txt">
-      <span class="eyebrow">Gợi ý mua sắm theo từng kiểu người</span>
-      <h1>Mua đúng món,<br>cho <span>đúng người.</span></h1>
-      <p>Mẹ bỉm cần rảnh tay, nàng công sở cần đỡ mỏi, cô nàng skincare cần đúng món. Vun Vén chọn sẵn những món xinh mà đáng tiền nhất cho từng nhóm — kèm review thật lòng.</p>
+      <span class="eyebrow">Mua ít mà chất · Tiêu đúng chỗ</span>
+      <h1>Mua ít hơn,<br><span>mua đúng hơn.</span></h1>
+      <p>Mỗi giai đoạn chỉ cần vài món thật sự đáng tiền. Vun Vén chọn giúp bạn những món đó, so giá ở 3 sàn và nói luôn cả những thứ <b>không cần mua</b>. Bớt được đồng nào, vun vén đồng đó.</p>
       <div class="who"><strong>Tôi là…</strong><div class="who-chips" id="whoChips"></div></div>
     </div>
     <div class="collage" aria-hidden="true">
       <img class="c1" src="assets/img/hero-1.jpg" alt="">
       <img class="c2" src="assets/img/sk-serum.jpg" alt="">
       <img class="c3" src="assets/img/sk-trang-diem.jpg" alt="">
-      <div class="stat"><b>50+</b><span>món chọn lọc<br>cho 10 kiểu người</span></div>
+      <div class="stat"><b id="avgSave">20%</b><span>rẻ hơn giá gốc<br>ở các món đang giảm</span></div>
     </div>
   </div>
 </section>
@@ -35,14 +35,14 @@
 <main>
   <section class="sec">
     <div class="wrap">
-      <div class="sec-title"><div><span class="eb">Danh mục</span><h2>Chọn theo người dùng</h2></div><a href="danh-muc.html">Xem tất cả →</a></div>
+      <div class="sec-title"><div><span class="eb">Danh mục</span><h2>Bạn đang ở giai đoạn nào?</h2></div><a href="danh-muc.html">Xem tất cả →</a></div>
       <div class="tiles" id="tiles"></div>
     </div>
   </section>
 
   <section class="sec" style="padding-top:8px">
     <div class="wrap">
-      <div class="sec-title"><div><span class="eb">Gợi ý nhanh</span><h2>Mua theo nhu cầu</h2><p>Mỗi nhóm 5 món, xếp theo thứ tự nên mua trước.</p></div></div>
+      <div class="sec-title"><div><span class="eb">Theo thứ tự ưu tiên</span><h2>Chỉ mua cái cần trước</h2><p>Mỗi nhóm 5 món, xếp theo mức cần thiết — món đầu nên có, món cuối có thể để sau.</p></div></div>
       <div class="tabs" id="tabs" role="tablist"></div>
       <div class="need-intro" id="needIntro"></div>
       <div class="grid" id="needGrid"></div>
@@ -53,10 +53,10 @@
     <div class="wrap promos">
       <a class="promo" href="danh-muc.html?nhom=o-rieng">
         <div class="txt">
-          <small>Bộ sưu tập</small>
-          <h3>Mới ra ở riêng? Sắm đủ cho căn phòng đầu tiên</h3>
-          <p>Robot hút bụi, máy pha cà phê, chén sứ… những món "một vốn bốn lời".</p>
-          <span class="btn gold">Xem bộ sưu tập</span>
+          <small>Ở riêng lần đầu</small>
+          <h3>Sắm đủ cho căn phòng đầu tiên, mà không phí</h3>
+          <p>5 món "một vốn bốn lời" và 3 món đừng vội mua — như bộ nồi 10 món hay máy làm sữa hạt.</p>
+          <span class="btn gold">Xem danh sách</span>
         </div>
         <img src="assets/img/hero-1.jpg" alt="Phòng khách ấm cúng" loading="lazy">
       </a>
@@ -64,7 +64,7 @@
         <img src="assets/img/bm-hop-qua.jpg" alt="Hộp quà gói nơ hồng" loading="lazy">
         <div class="txt">
           <small>Mùa quà Tết</small>
-          <h3>Quà biếu bố mẹ, chu đáo mà tinh tế</h3>
+          <h3>Quà biếu bố mẹ: chu đáo, không cần đắt</h3>
           <span class="btn gold">Xem gợi ý quà</span>
         </div>
       </a>
@@ -73,30 +73,42 @@
 
   <section class="sec">
     <div class="wrap">
-      <div class="sec-title"><div><span class="eb">Được mua nhiều</span><h2>Bán chạy nhất</h2><p>Những món được nhiều người mua và đánh giá tốt nhất.</p></div><a href="danh-muc.html">Xem tất cả →</a></div>
+      <div class="sec-title"><div><span class="eb">Ít rủi ro mua hớ</span><h2>Được tin dùng nhiều nhất</h2><p>Hàng nghìn người đã mua và chấm điểm cao — chắc tay hơn món vừa mới nổi.</p></div><a href="danh-muc.html">Xem tất cả →</a></div>
       <div class="grid" id="bestGrid"></div>
     </div>
   </section>
 
   <section class="sec" style="padding-top:8px">
     <div class="wrap">
-      <div class="sec-title"><div><span class="eb">Deal</span><h2>Đang giảm sâu</h2><p>Giảm nhiều nhất so với giá gốc — nên xem trước khi hết voucher.</p></div></div>
+      <div class="sec-title"><div><span class="eb">Đúng lúc</span><h2>Đang về giá tốt</h2><p>Chỉ nên mua nếu bạn vốn đã định mua — giảm giá không phải lý do để mua thêm.</p></div></div>
       <div class="grid" id="dealGrid"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="meo">
+    <div class="wrap">
+      <div class="sec-title"><div><span class="eb">Mẹo vun vén</span><h2>4 thói quen giúp bớt tiền mỗi tháng</h2></div></div>
+      <div class="tips">
+        <div class="tip"><b>01</b><h3>Đợi 48 giờ rồi mới chốt</h3><p>Bỏ vào giỏ, 2 ngày sau còn muốn thì mua. Phần lớn món mua theo cảm hứng sẽ tự rơi khỏi danh sách.</p></div>
+        <div class="tip"><b>02</b><h3>So giá cả 3 sàn</h3><p>Cùng một món, Shopee, Lazada và TikTok Shop có thể chênh nhau 10–20% tuỳ voucher trong ngày.</p></div>
+        <div class="tip"><b>03</b><h3>Canh ngày đôi</h3><p>Món đắt tiền nên để dành tới 11.11, 12.12 hoặc ngày lương — thường giảm thêm 10–15%.</p></div>
+        <div class="tip"><b>04</b><h3>Thuê, mượn, mua lại</h3><p>Đồ dùng ngắn hạn như váy cưới, đồ sơ sinh, máy hút sữa: thuê hoặc mua lại đồ cũ rẻ hơn rất nhiều.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="sec editorial" id="review">
     <div class="wrap">
-      <div class="sec-title"><div><span class="eb">Góc review</span><h2>Review mới nhất</h2><p>Dùng thật rồi mới viết: ưu, nhược và ai không nên mua.</p></div></div>
+      <div class="sec-title"><div><span class="eb">Góc review</span><h2>Review trước khi xuống tiền</h2><p>Có cả điểm trừ, ai không nên mua và mẹo mua rẻ hơn.</p></div></div>
       <div class="posts" id="posts"></div>
     </div>
   </section>
 
   <section class="sec" id="cach-chon">
     <div class="wrap trust">
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5" stroke-linecap="round"/></svg><h3>Ưu tiên shop chính hãng</h3><p>Chọn Mall / shop chính hãng, đánh giá từ 4,5 sao và đọc kỹ cả review 1–2 sao.</p></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><h3>Bắt đầu từ con người</h3><p>Không hỏi “món nào hot”, mà hỏi “người này đang mệt chuyện gì” rồi mới chọn đồ.</p></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg><h3>Bạn không trả thêm</h3><p>Link affiliate không làm tăng giá. Tụi mình nhận hoa hồng nhỏ từ sàn để duy trì trang.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5" stroke-linecap="round"/></svg><h3>Mua ít mà chất</h3><p>Một món bền dùng 3 năm rẻ hơn ba món rẻ dùng 3 tháng. Tụi mình ưu tiên shop chính hãng, đánh giá từ 4,5 sao.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><h3>Nói cả khi không nên mua</h3><p>Mỗi nhóm đều có danh sách “đừng phí tiền vào…”, mỗi bài review đều có mục “ai không nên mua”.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg><h3>Bạn không trả thêm đồng nào</h3><p>Link affiliate không làm tăng giá. Tụi mình nhận hoa hồng nhỏ từ sàn để duy trì trang, vậy thôi.</p></div>
     </div>
   </section>
 </main>

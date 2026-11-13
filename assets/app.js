@@ -19,6 +19,7 @@ const ICON = {
 const fmt = n => n.toLocaleString("vi-VN") + "₫";
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const imgSrc = name => /^https?:|\//.test(name) ? name : `assets/img/${name}.jpg`;
+const mfmt = n => n >= 1e6 ? (n / 1e6).toFixed(n % 1e6 ? 1 : 0).replace(".", ",").replace(",0", "") + " triệu" : Math.round(n / 1000) + "k";
 const kfmt = n => n >= 1000 ? (n / 1000).toFixed(1).replace(".", ",").replace(",0", "") + "k" : String(n);
 const off = p => p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
 const starHTML = (r, cls = "") => `<span class="stars ${cls}" aria-label="${r} trên 5 sao"><i style="width:${r / 5 * 100}%"></i></span>`;
@@ -70,6 +71,7 @@ function productCard(p) {
       <a class="ptitle" href="${mainHref(p)}" ${isExternal(p) ? EXT : ""}>${esc(p.name)}</a>
       <div class="rate">${starHTML(p.rating)} <b>${p.rating}</b> <span>· ${kfmt(p.reviews)} đánh giá</span></div>
       <div class="price"><b>${fmt(p.price)}</b>${p.oldPrice ? `<em>-${d}%</em><s>${fmt(p.oldPrice)}</s>` : ""}</div>
+      ${p.oldPrice ? `<div class="save">Tiết kiệm ${mfmt(p.oldPrice - p.price)} so với giá gốc</div>` : ""}
       <div class="pmeta"><span>${esc(p.shop)}</span>${p.freeship ? `<span>·</span><span class="ship">Freeship</span>` : ""}</div>
       <div class="shopline">${shops.map(k => `<a href="${esc(p.link[k])}" ${EXT} aria-label="Mua trên ${SHOPS[k].name}">${SHOPS[k].name.replace(" Shop", "")}</a>`).join("")}</div>
     </div>
@@ -80,7 +82,7 @@ function productCard(p) {
 function renderChrome(active) {
   const hdr = document.getElementById("site-header");
   if (hdr) hdr.innerHTML = `
-  <div class="topbar">Mua qua link Vun Vén — <b>giá không đổi</b>, bạn không mất thêm đồng nào · Deal mới cập nhật mỗi thứ Sáu</div>
+  <div class="topbar">Vun vén: <b>mua đúng món cần, đúng giá tốt</b> — phần còn lại để dành cho mình</div>
   <header class="hdr">
     <div class="wrap hdr-main" style="position:relative">
       <a href="./" class="logo"><span class="mark">${ICON.leaf}</span>Vun Vén</a>
@@ -95,7 +97,7 @@ function renderChrome(active) {
       </form>
       <nav class="hdr-act">
         <a href="danh-muc.html?saved=1" aria-label="Đã lưu">${ICON.heart}<span class="lbl">Đã lưu</span><span class="count" data-saved-count></span></a>
-        <a href="#nl" aria-label="Nhận deal">${ICON.mail}<span class="lbl">Nhận deal</span></a>
+        <a href="#nl" aria-label="Báo giá tốt">${ICON.mail}<span class="lbl">Báo giá tốt</span></a>
       </nav>
     </div>
     <nav class="navrow"><ul style="max-width:1320px">
@@ -109,17 +111,17 @@ function renderChrome(active) {
   if (ftr) ftr.innerHTML = `
   <section class="newsletter" id="nl">
     <div class="wrap"><div class="nl-box">
-      <div><h2>Deal hời mỗi thứ Sáu</h2><p>Một email mỗi tuần: món đang giảm sâu nhất của từng nhóm + review mới. Huỷ lúc nào cũng được.</p></div>
+      <div><h2>Báo giá tốt, không dụ mua thêm</h2><p>Mỗi thứ Sáu một email: món đáng mua nào đang về giá tốt + một mẹo tiết kiệm. Không spam, huỷ lúc nào cũng được.</p></div>
       <form class="nl-form" id="nlForm"><input type="email" placeholder="Email của bạn" required aria-label="Email"><button>Đăng ký</button></form>
     </div></div>
   </section>
   <footer class="ftr">
     <div class="wrap">
       <div class="fcols">
-        <div><a href="./" class="logo"><span class="mark">${ICON.leaf}</span>Vun Vén</a><p class="about">Gợi ý đồ dùng theo đúng nhu cầu của từng người — từ mẹ bỉm sữa, dân văn phòng đến founder. Chọn kỹ, review thật.</p></div>
+        <div><a href="./" class="logo"><span class="mark">${ICON.leaf}</span>Vun Vén</a><p class="about">Mua ít mà chất. Vun Vén chọn giúp bạn món thật sự cần cho từng giai đoạn, so giá ở 3 sàn và nói thật cả khi không nên mua.</p></div>
         <div><h4>Mua theo nhu cầu</h4><ul>${PERSONAS.slice(0, 5).map(p => `<li><a href="danh-muc.html?nhom=${p.id}">${esc(p.name)}</a></li>`).join("")}</ul></div>
         <div><h4>&nbsp;</h4><ul>${PERSONAS.slice(5).map(p => `<li><a href="danh-muc.html?nhom=${p.id}">${esc(p.name)}</a></li>`).join("")}</ul></div>
-        <div><h4>Vun Vén</h4><ul><li><a href="./#review">Bài review</a></li><li><a href="./#cach-chon">Cách tụi mình chọn đồ</a></li><li><a href="danh-muc.html?saved=1">Đồ đã lưu</a></li><li><a href="#nl">Nhận deal qua email</a></li></ul></div>
+        <div><h4>Vun Vén</h4><ul><li><a href="./#review">Bài review</a></li><li><a href="./#cach-chon">Cách tụi mình chọn đồ</a></li><li><a href="danh-muc.html?saved=1">Đồ đã lưu</a></li><li><a href="#nl">Nhận báo giá tốt</a></li></ul></div>
       </div>
       <div class="disclose">
         <span>Một số liên kết là link tiếp thị liên kết (affiliate): Vun Vén có thể nhận hoa hồng khi bạn mua, bạn không trả thêm đồng nào. Giá mang tính tham khảo.</span>
@@ -136,7 +138,7 @@ function renderChrome(active) {
   const q = new URLSearchParams(location.search).get("q");
   if (q) document.getElementById("q").value = q;
   const nl = document.getElementById("nlForm");
-  if (nl) nl.addEventListener("submit", e => { e.preventDefault(); e.target.reset(); toast("Cảm ơn bạn! Deal hời sẽ sớm tới hộp thư."); });
+  if (nl) nl.addEventListener("submit", e => { e.preventDefault(); e.target.reset(); toast("Cảm ơn bạn! Thứ Sáu này tụi mình gửi báo giá đầu tiên nhé."); });
   syncSavedCount();
 }
 
@@ -154,11 +156,15 @@ function initHome() {
   const draw = () => {
     const p = personaById(cur);
     tabs.innerHTML = PERSONAS.map(x => `<button class="tab ${x.id === cur ? "on" : ""}" data-id="${x.id}" role="tab" aria-selected="${x.id === cur}">${esc(x.name)}</button>`).join("");
-    document.getElementById("needIntro").innerHTML = `<span><b>${esc(p.name)}:</b> ${esc(p.desc)}</span><a href="danh-muc.html?nhom=${p.id}">Xem tất cả →</a>`;
+    document.getElementById("needIntro").innerHTML = `<span><b>${esc(p.name)}:</b> ${esc(p.desc)}<br><span class="skip1"><b>Không cần mua:</b> ${esc(p.skip[0])}</span></span><a href="danh-muc.html?nhom=${p.id}">Xem cả nhóm →</a>`;
     document.getElementById("needGrid").innerHTML = ALL.filter(x => x.persona === cur).map(productCard).join("");
   };
   tabs.addEventListener("click", e => { const b = e.target.closest(".tab"); if (b) { cur = b.dataset.id; draw(); } });
   draw();
+
+  const withOld = ALL.filter(p => p.oldPrice);
+  const avg = Math.round(withOld.reduce((a, p) => a + off(p), 0) / withOld.length);
+  const st = document.getElementById("avgSave"); if (st) st.textContent = avg + "%";
 
   const best = [...ALL].filter(p => p.badge === "Bán chạy").sort((a, b) => b.reviews - a.reviews).slice(0, 10);
   document.getElementById("bestGrid").innerHTML = best.map(productCard).join("");
@@ -208,7 +214,12 @@ function initListing() {
     if (st.q) { title = `Kết quả cho “${st.q}”`; desc = per ? `Trong nhóm ${per.name}.` : "Tìm trong tất cả nhóm."; }
     if (st.saved) { title = "Đồ bạn đã lưu"; desc = "Bấm vào trái tim trên mỗi sản phẩm để lưu lại xem sau. Danh sách lưu trên trình duyệt này."; }
     head.innerHTML = `${per && !st.q && !st.saved ? `<img src="${imgSrc(per.img)}" alt="">` : ""}
-      <div><h1>${esc(title)}</h1><p>${esc(desc)}</p>${per && !st.q && !st.saved ? `<div class="chips">${per.needs.map(n => `<span class="chip">${esc(n)}</span>`).join("")}</div>` : ""}</div>`;
+      <div style="flex:1"><h1>${esc(title)}</h1><p>${esc(desc)}</p>${per && !st.q && !st.saved ? `<div class="chips">${per.needs.map(n => `<span class="chip">${esc(n)}</span>`).join("")}</div>` : ""}</div>
+      ${per && !st.q && !st.saved ? (() => { const ps = per.products, need = ps.slice(0, 2).reduce((a, x) => a + x.price, 0), all = ps.reduce((a, x) => a + x.price, 0), saved = ps.reduce((a, x) => a + (x.oldPrice ? x.oldPrice - x.price : 0), 0);
+        return `<div class="budget"><small>Ngân sách gợi ý</small><div><b>${fmt(need)}</b><span>2 món cần nhất</span></div><div><b>${fmt(all)}</b><span>đủ cả bộ 5 món</span></div>${saved ? `<em>Đang rẻ hơn giá gốc ${mfmt(saved)}</em>` : ""}</div>`; })() : ""}`;
+    const sk = document.getElementById("skipBox");
+    sk.innerHTML = per && !st.q && !st.saved ? `<h3>Đừng phí tiền vào…</h3><ul>${per.skip.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
+    sk.style.display = sk.innerHTML ? "" : "none";
     document.getElementById("crumbName").textContent = st.saved ? "Đã lưu" : per ? per.name : "Tất cả";
     document.title = `${title} — Vun Vén`;
 
@@ -268,6 +279,7 @@ function initReview() {
           <div class="note">Giá tham khảo, có thể thay đổi theo voucher và thời điểm.</div>
         </div>
         <div class="buybtns">
+          <div class="cmp">So giá trước khi mua — bấm từng sàn để xem voucher đang có:</div>
           ${shops.map((k, i) => `<a class="btn block ${i === 0 ? "dark" : ""}" href="${esc(p.link[k])}" ${EXT}>Xem giá trên ${SHOPS[k].name}</a>`).join("")}
           <button class="save-btn ${Saved.has(p.id) ? "on" : ""}" data-save="${p.id}">${ICON.heart} Lưu lại xem sau</button>
         </div>
@@ -276,7 +288,8 @@ function initReview() {
           <li>${ICON.tag}<span>Bán bởi <b>${esc(p.shop)}</b>${p.freeship ? " · Freeship" : ""}</span></li>
           <li>${ICON.book}<span>Bài review ${r.readTime} phút đọc · cập nhật ${r.date}</span></li>
         </ul>
-        <details open><summary>Tóm tắt nhanh</summary><div class="dc">${esc(r.summary)}</div></details>
+        <details open><summary>Mẹo mua rẻ hơn</summary><div class="dc"><ul class="tips-ul">${r.saveTips.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div></details>
+        <details><summary>Tóm tắt nhanh</summary><div class="dc">${esc(r.summary)}</div></details>
         <details><summary>Thông số chính</summary><div class="dc"><table>${r.specs.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join("")}</table></div></details>
         <details><summary>Ai không nên mua?</summary><div class="dc"><ul style="margin:0;padding-left:18px">${r.notFor.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div></details>
       </div>
@@ -294,6 +307,7 @@ function initReview() {
           <div class="cons"><h4>Điểm trừ</h4><ul>${r.cons.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
         </div>
         ${r.sections.map(s => `<h3 class="s">${esc(s.h)}</h3><p class="body">${esc(s.p)}</p>`).join("")}
+        <div class="savebox"><h4>Mẹo mua rẻ hơn</h4><ol>${r.saveTips.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>
         <div class="fit">
           <div><h4>Nên mua nếu bạn là…</h4><ul>${r.fitFor.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
           <div><h4>Cân nhắc lại nếu…</h4><ul>${r.notFor.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>

@@ -10,6 +10,7 @@
    - freeship   : true nếu shop có freeship
    - link       : link affiliate từng sàn. Để "" thì sàn đó tự ẩn.
    - review     : id bài review trong REVIEWS (nếu có)
+   Mỗi nhóm có `skip`: những món KHÔNG cần mua / có cách rẻ hơn (hiện ở trang danh mục).
    Thứ tự các nhóm: sửa PERSONA_ORDER ở cuối file.
    ========================================================= */
 
@@ -24,6 +25,7 @@ const PERSONAS = [
     id: "me-bim", name: "Mẹ bỉm sữa", short: "Mẹ & bé", img: "cat-me-bim",
     desc: "Giai đoạn 0–12 tháng là lúc mẹ thiếu ngủ nhất. Ưu tiên đồ giúp rảnh tay, an toàn cho bé và dễ vệ sinh.",
     needs: ["Rảnh tay", "An toàn cho bé", "Dễ vệ sinh"],
+    skip: ["Máy hâm sữa riêng — một ca nước ấm 40°C làm tốt y như vậy.", "Giày tập đi cho bé dưới 12 tháng — bé chưa cần, để chân trần còn tốt hơn.", "Quần áo sơ sinh size 0–3 tháng quá 5 bộ — bé lớn rất nhanh, xin lại đồ cũ cũng được."],
     products: [
       { id: "may-hut-sua", name: "Máy hút sữa điện đôi không dây, 9 mức lực hút", img: "mb-may-hut-sua", price: 1290000, oldPrice: 1590000, rating: 4.8, reviews: 2134, badge: "Bán chạy", shop: "Shopee Mall", freeship: true, review: "may-hut-sua",
         why: "Đeo gọn trong áo, vừa hút vừa ru con. Chọn loại có từ 9 mức lực hút trở lên.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
@@ -41,6 +43,7 @@ const PERSONAS = [
     id: "khoi-nghiep", name: "Dân khởi nghiệp", short: "Khởi nghiệp", img: "cat-khoi-nghiep",
     desc: "Founder ngồi máy 12 tiếng, họp liên tục, gặp khách bất chợt. Đầu tư vào sức khoẻ và năng suất là khoản đầu tư sinh lời.",
     needs: ["Năng suất", "Chuyên nghiệp", "Bền bỉ"],
+    skip: ["Văn phòng riêng ngay từ đầu — coworking hoặc làm ở nhà đến khi có đội.", "Phần mềm trả phí theo năm — dùng bản miễn phí đến khi thật sự thiếu tính năng.", "Màn hình thứ ba — hai màn hình là đủ cho phần lớn công việc."],
     products: [
       { id: "ghe-cong-thai-hoc", name: "Ghế công thái học lưới, tựa đầu & tay vịn 4D", img: "kn-ghe", price: 3490000, oldPrice: 4290000, rating: 4.8, reviews: 1532, badge: "Đáng tiền", shop: "Shopee Mall", freeship: true, review: "ghe-cong-thai-hoc",
         why: "Tựa thắt lưng chỉnh được, đỡ cột sống — ngồi 10 tiếng vẫn tỉnh táo.", link: { shopee: "#", lazada: "#", tiktok: "" } },
@@ -58,6 +61,7 @@ const PERSONAS = [
     id: "van-phong", name: "Dân văn phòng", short: "Văn phòng", img: "cat-van-phong",
     desc: "Đau vai gáy, khô mắt, quên uống nước là 'bệnh nghề nghiệp' của dân công sở. Vài món nhỏ trên bàn đổi lại cả ngày dễ chịu.",
     needs: ["Đỡ mỏi", "Gọn bàn", "Giá mềm"],
+    skip: ["Ghế gaming trông 'xịn' — ghế công thái học lưới cùng giá ngồi tốt hơn.", "Bình nước 'thông minh' có màn hình — bình có vạch chia đã đủ nhắc uống nước.", "Đồ trang trí bàn làm việc theo trend — một chậu cây nhỏ là đủ xinh."],
     products: [
       { id: "massage", name: "Máy massage cổ vai gáy xung điện, có chườm ấm", img: "vp-massage", price: 690000, oldPrice: 890000, rating: 4.6, reviews: 3876, badge: "Bán chạy", shop: "Shopee Mall", freeship: true,
         why: "15 phút giờ nghỉ trưa là vai gáy nhẹ hẳn. Nên chọn loại có chế độ chườm ấm.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
@@ -75,6 +79,7 @@ const PERSONAS = [
     id: "sinh-vien", name: "Sinh viên / Gen Z", short: "Sinh viên", img: "cat-sinh-vien",
     desc: "Ở trọ, học online, đi làm thêm — đồ cần đa năng, bền và giá dễ thở. Gần như toàn món dưới 800k.",
     needs: ["Giá sinh viên", "Đa năng", "Phòng trọ nhỏ"],
+    skip: ["Tai nghe flagship 5–6 triệu — bản tầm trung dưới 1 triệu đủ cho học và nghe nhạc.", "Bàn ghế mới cho phòng trọ ngắn hạn — mua lại đồ thanh lý của khoá trên.", "Sạc dự phòng trên 20.000mAh — nặng, mang lên máy bay còn bị hạn chế."],
     products: [
       { id: "tai-nghe-anc", name: "Tai nghe true wireless chống ồn ANC, pin 30 giờ", img: "sv-tai-nghe", price: 790000, oldPrice: 990000, rating: 4.6, reviews: 4518, badge: "Bán chạy", shop: "Shopee Mall", freeship: true, review: "tai-nghe-anc",
         why: "Học thư viện, đi xe buýt đều yên tĩnh. Dưới 1 triệu mà có ANC là quá hời.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
@@ -92,6 +97,7 @@ const PERSONAS = [
     id: "gymer", name: "Gymer & sống healthy", short: "Thể thao", img: "cat-gymer",
     desc: "Dù mới tập hay đã lên cơ, đo lường được thì mới tiến bộ được. Bộ đồ này giúp bạn tập đều và phục hồi tốt hơn.",
     needs: ["Đo lường", "Tập tại nhà", "Phục hồi"],
+    skip: ["Máy chạy bộ khi chưa tập đều — thẻ gym 3 tháng rẻ hơn và biết mình có theo nổi không.", "Thực phẩm bổ sung đắt tiền cho người mới — ăn đủ đạm từ bữa ăn trước đã.", "Đồ tập hàng hiệu — đồ thoáng khí giá vừa phải dùng y như nhau."],
     products: [
       { id: "dong-ho", name: "Đồng hồ thông minh đo nhịp tim, SpO2, pin 10 ngày", img: "gy-dong-ho", price: 1190000, oldPrice: 1490000, rating: 4.6, reviews: 2788, badge: "Bán chạy", shop: "Shopee Mall", freeship: true,
         why: "Theo dõi nhịp tim, giấc ngủ, bước chân và hơn 100 chế độ luyện tập.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
@@ -109,6 +115,7 @@ const PERSONAS = [
     id: "skincare", name: "Tín đồ skincare", short: "Làm đẹp", img: "cat-skincare",
     desc: "Không cần 10 bước — chỉ cần đúng món, đúng thứ tự và kiên trì. Đây là bộ nền móng ai cũng nên có.",
     needs: ["Chống nắng", "Làm sạch", "Dưỡng ẩm"],
+    skip: ["Máy rửa mặt đắt tiền — đôi tay và sữa rửa mặt dịu nhẹ là đủ.", "Combo 10 bước theo trend — chống nắng + dưỡng ẩm đều đặn hiệu quả hơn.", "Mỹ phẩm size mini giá cao — tính theo ml thường đắt gấp đôi size thường."],
     products: [
       { id: "chong-nang", name: "Kem chống nắng phổ rộng SPF50+ PA++++, kết cấu sữa", img: "sk-chong-nang", price: 280000, oldPrice: 350000, rating: 4.8, reviews: 8920, badge: "Bán chạy", shop: "Shopee Mall", freeship: true,
         why: "Bước quan trọng nhất của skincare. Kết cấu mỏng nhẹ, không bết, không vệt trắng.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
@@ -126,6 +133,7 @@ const PERSONAS = [
     id: "o-rieng", name: "Mới ra ở riêng", short: "Nhà cửa", img: "cat-o-rieng",
     desc: "Lần đầu dọn ra ở riêng, cái gì cũng muốn mua. Đây là những món 'một vốn bốn lời' giúp nhà gọn, ăn ngon, sống khoẻ.",
     needs: ["Tiết kiệm thời gian", "Nấu nhanh", "Nhà sạch"],
+    skip: ["Bộ nồi chảo 10 món — ở một mình chỉ cần 1 chảo chống dính và 1 nồi.", "Máy làm sữa hạt, máy làm bánh mì — hay bị bỏ xó, thử dùng ké 1 tháng rồi hẵng mua.", "Đồ trang trí mua theo set — thêm dần theo thời gian vừa đẹp vừa ít phí."],
     products: [
       { id: "robot", name: "Robot hút bụi lau nhà, bản đồ LiDAR, điều khiển qua app", img: "or-robot", price: 3990000, oldPrice: 5490000, rating: 4.7, reviews: 2260, badge: "Đáng tiền", shop: "Shopee Mall", freeship: true,
         why: "Đi làm về là nhà đã sạch. Bản đồ LiDAR giúp robot không sót góc.", link: { shopee: "#", lazada: "#", tiktok: "" } },
@@ -143,6 +151,7 @@ const PERSONAS = [
     id: "du-lich", name: "Dân xê dịch", short: "Du lịch", img: "cat-du-lich",
     desc: "Hành lý gọn thì chuyến đi mới nhẹ đầu. Bộ đồ nghề giúp bạn xếp đồ nhanh, đi xa an toàn và có ảnh đẹp.",
     needs: ["Gọn nhẹ", "Bền", "Chụp ảnh"],
+    skip: ["Vali size lớn cho chuyến 3–4 ngày — vali xách tay còn đỡ được tiền ký gửi.", "Máy ảnh đắt tiền khi chỉ đi 1–2 chuyến/năm — điện thoại đời mới đã chụp rất đẹp.", "Đồ du lịch dùng một lần — chọn loại dùng lại được, đỡ tiền mà đỡ rác."],
     products: [
       { id: "vali", name: "Vali khung nhôm 20 inch xách tay, khoá TSA", img: "dl-vali", price: 1590000, oldPrice: 1990000, rating: 4.7, reviews: 1745, badge: "Bán chạy", shop: "Shopee Mall", freeship: true,
         why: "Vừa chuẩn xách tay 7kg, bánh xe xoay 360° êm, khoá TSA khi bay quốc tế.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
@@ -160,6 +169,7 @@ const PERSONAS = [
     id: "co-dau", name: "Cô dâu sắp cưới", short: "Cưới hỏi", img: "cat-co-dau",
     desc: "Từ dạm ngõ đến ngày cưới có cả trăm thứ phải lo. Đây là những món giúp cô dâu xinh hơn, đỡ lo hơn và giữ lại kỷ niệm đẹp.",
     needs: ["Xinh ngày cưới", "Đỡ tốn kém", "Kỷ niệm đẹp"],
+    skip: ["Mua đứt váy cưới chỉ mặc một ngày — thuê váy rẻ hơn 3–5 lần.", "Quà cảm ơn in tên riêng số lượng lớn — khách hay bỏ lại, chọn món dùng được.", "Giày cưới chỉ đi một lần — chọn đôi còn mang đi làm, đi tiệc được."],
     products: [
       { id: "hoa-cuoi", name: "Hoa cưới cầm tay hoa lụa cao cấp tông hồng pastel", img: "cd-hoa-cuoi", price: 750000, oldPrice: 950000, rating: 4.9, reviews: 1240, badge: "Bán chạy", shop: "Shopee Mall", freeship: true,
         why: "Hoa lụa không héo, chụp ảnh cưới, ăn hỏi, đãi tiệc đều dùng được — xong còn giữ làm kỷ niệm.", link: { shopee: "#", lazada: "", tiktok: "#" } },
@@ -177,6 +187,7 @@ const PERSONAS = [
     id: "bieu-bo-me", name: "Quà biếu bố mẹ", short: "Quà tặng", img: "cat-bieu-bo-me",
     desc: "Quà cho bố mẹ không cần đắt, cần dùng được hằng ngày và tốt cho sức khoẻ. Món nào cũng dễ dùng.",
     needs: ["Sức khoẻ", "Dễ dùng", "Bền"],
+    skip: ["Ghế massage toàn thân giá chục triệu — bố mẹ thường ít dùng, máy massage chân là đủ.", "Thực phẩm chức năng không rõ nguồn gốc — hỏi bác sĩ trước khi mua.", "Đồ công nghệ nhiều nút — chọn món bấm một nút là dùng được."],
     products: [
       { id: "huyet-ap", name: "Máy đo huyết áp bắp tay, màn hình số lớn có giọng đọc", img: "bm-huyet-ap", price: 790000, oldPrice: 950000, rating: 4.8, reviews: 3620, badge: "Bán chạy", shop: "Shopee Mall", freeship: true,
         why: "Số to, đọc kết quả bằng giọng nói, lưu lịch sử đo cho 2 người.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
@@ -202,6 +213,7 @@ const REVIEWS = [
     score: 8.7, readTime: 6, date: "10/11/2026", author: "Vun Vén",
     summary: "Gọn, êm, rảnh tay thật sự — rất hợp mẹ đi làm lại hoặc mẹ có con bám. Điểm trừ là phễu hơi khó lắp lần đầu và lượng sữa có thể thấp hơn máy để bàn với một số mẹ.",
     verdict: "Nên mua nếu bạn cần hút sữa lúc đang làm việc khác. Nếu chỉ hút ở nhà và cần tối đa lượng sữa, máy để bàn vẫn ổn định hơn.",
+    saveTips: ["Canh các ngày đôi (11.11, 12.12): máy hút sữa thường giảm thêm 10–15% so với ngày thường.", "Hỏi shop có bán riêng phễu, van thay thế không — hỏng phụ kiện thì thay phụ kiện, không phải mua máy mới.", "Nếu chỉ hút 1–2 tháng, cân nhắc thuê máy hoặc mua lại máy cũ còn bảo hành."],
     scores: { "Thiết kế": 9, "Lực hút": 8.5, "Độ êm": 9, "Pin": 8, "Dễ vệ sinh": 8.5, "Giá trị": 9 },
     pros: ["Đeo gọn trong áo ngực, không dây rợ — vừa hút vừa bế con, gõ máy tính được", "9 mức lực hút + 3 chế độ (kích sữa, hút, massage) dễ tinh chỉnh", "Tiếng ồn nhỏ (khoảng 45dB), hút trong phòng họp vẫn kín đáo", "Phễu silicone mềm, ít gây đau đầu ti"],
     cons: ["Lần đầu lắp phễu hơi lóng ngóng, cần xem kỹ hướng dẫn", "Cốc chứa chỉ khoảng 180ml/bên, mẹ nhiều sữa phải đổ giữa chừng", "Pin đủ khoảng 4–5 cữ, phải sạc mỗi ngày"],
@@ -221,6 +233,7 @@ const REVIEWS = [
     score: 8.4, readTime: 7, date: "02/11/2026", author: "Vun Vén",
     summary: "Khoản đầu tư đáng giá nhất cho người ngồi máy cả ngày. Tựa thắt lưng và tay vịn 4D làm rất tốt, lưới thoáng mát. Bù lại, lắp ráp mất ~30 phút và lưới ngồi hơi cứng với người dưới 50kg.",
     verdict: "Nếu bạn ngồi trên 6 tiếng/ngày, đây là món nên mua trước cả màn hình mới. Người nhỏ con nên ngồi thử hoặc chọn bản đệm mút.",
+    saveTips: ["Không hay ngả lưng thì chọn bản không tựa đầu — rẻ hơn khoảng 500.000₫.", "Ghế trưng bày hoặc hộp móp thường giảm 20–30% mà vẫn đủ bảo hành.", "So giá cùng một mẫu ở cả 3 sàn — có lúc chênh nhau 400.000–600.000₫."],
     scores: { "Đỡ lưng": 9, "Tuỳ chỉnh": 9, "Thoáng mát": 9, "Độ hoàn thiện": 7.5, "Lắp ráp": 7, "Giá trị": 8.5 },
     pros: ["Tựa thắt lưng chỉnh độ cao và độ sâu, ôm sát cột sống", "Tay vịn 4D, kê tay ngang bàn phím rất tự nhiên", "Lưng và đệm lưới thoáng, mùa hè ngồi không bí", "Ngả 135° có khoá, nghỉ trưa ngay tại bàn"],
     cons: ["Lắp ráp hơi mất công (~30 phút)", "Lưới đệm ngồi hơi cứng với người nhẹ cân", "Một số khớp nhựa chưa thật sự cao cấp"],
@@ -240,6 +253,7 @@ const REVIEWS = [
     score: 8.1, readTime: 5, date: "28/10/2026", author: "Vun Vén",
     summary: "Chống ồn đủ dùng cho xe buýt, quán cà phê, thư viện — giảm rõ tiếng ồn tần số thấp. Âm thanh hơi thiên bass, pin tốt. Đừng kỳ vọng bằng tai nghe 5–6 triệu, nhưng ở tầm giá này rất đáng tiền.",
     verdict: "Lựa chọn hời nhất cho sinh viên muốn trải nghiệm ANC lần đầu. Nếu bạn cần mic gọi điện thật tốt ở nơi đông người thì nên cân nhắc thêm.",
+    saveTips: ["Khi hãng ra bản mới, bản năm ngoái thường giảm khoảng 30% mà chất lượng gần như không khác.", "Kiểm tra voucher dành cho sinh viên trên sàn trước khi thanh toán.", "Không cần mua hộp bảo vệ đắt tiền — ốp silicon vài chục nghìn là đủ."],
     scores: { "Chống ồn": 8, "Âm thanh": 8, "Pin": 8.5, "Đeo thoải mái": 8.5, "Mic": 7, "Giá trị": 9.5 },
     pros: ["ANC giảm rõ tiếng động cơ, điều hoà, tiếng xe", "Pin ~7 tiếng (bật ANC), cả hộp ~30 tiếng", "Có chế độ xuyên âm để nghe thông báo, nói chuyện", "App chỉnh EQ, cập nhật firmware"],
     cons: ["Mic thu cả tiếng ồn xung quanh khi gọi ở ngoài đường", "Âm bass hơi dày, nghe nhạc acoustic chưa thật mộc", "Hộp sạc nhựa bóng dễ trầy"],
