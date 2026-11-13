@@ -11,6 +11,7 @@ const ICON = {
   shield: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5" stroke-linecap="round"/></svg>',
   book: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5z"/><path d="M4 21a2 2 0 0 1 2-2h13v2H6"/><path d="M9 7h6M9 11h6" stroke-linecap="round"/></svg>',
   tag: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>',
+  leaf: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 20c0-6 2-10 8-12-1 6-3 10-8 12z" fill="#F2B33D"/><path d="M12 20C12 13 9.5 9 4 7c.5 6.5 3 11 8 13z" fill="#fff"/><path d="M12 21v-6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>',
   filter: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>'
 };
 
@@ -61,16 +62,16 @@ function productCard(p) {
   <article class="pcard">
     <a class="pimg" href="${mainHref(p)}" ${isExternal(p) ? EXT : ""}>
       <img src="${imgSrc(p.img)}" alt="${esc(p.name)}" loading="lazy" width="640" height="640">
-      ${p.review ? `<span class="rv-flag">Có bài review</span>` : ""}
+      ${p.badge ? `<span class="pbadge ${p.badge === "Bán chạy" ? "" : "alt"}">${esc(p.badge)}</span>` : ""}
+      ${p.review ? `<span class="rv-flag">${ICON.check.replace('class="i"', 'width="14" height="14"')} Có bài review</span>` : ""}
     </a>
     <button class="heart ${Saved.has(p.id) ? "on" : ""}" data-save="${p.id}" aria-pressed="${Saved.has(p.id)}" aria-label="Lưu ${esc(p.name)}">${ICON.heart}</button>
     <div class="pbody">
       <a class="ptitle" href="${mainHref(p)}" ${isExternal(p) ? EXT : ""}>${esc(p.name)}</a>
-      <div class="rate">${starHTML(p.rating)} <span>(${kfmt(p.reviews)})</span></div>
-      <div class="price"><b>${fmt(p.price)}</b>${p.oldPrice ? `<s>${fmt(p.oldPrice)}</s><em>(-${d}%)</em>` : ""}</div>
-      <div class="pmeta">${esc(p.shop)}</div>
-      ${(p.badge || p.freeship) ? `<div class="badges">${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ""}${p.freeship ? `<span class="badge ship">Freeship</span>` : ""}</div>` : ""}
-      <div class="shopline">Mua tại: ${shops.map(k => `<a href="${esc(p.link[k])}" ${EXT}>${SHOPS[k].name}</a>`).join(" · ")}</div>
+      <div class="rate">${starHTML(p.rating)} <b>${p.rating}</b> <span>· ${kfmt(p.reviews)} đánh giá</span></div>
+      <div class="price"><b>${fmt(p.price)}</b>${p.oldPrice ? `<em>-${d}%</em><s>${fmt(p.oldPrice)}</s>` : ""}</div>
+      <div class="pmeta"><span>${esc(p.shop)}</span>${p.freeship ? `<span>·</span><span class="ship">Freeship</span>` : ""}</div>
+      <div class="shopline">${shops.map(k => `<a href="${esc(p.link[k])}" ${EXT} aria-label="Mua trên ${SHOPS[k].name}">${SHOPS[k].name.replace(" Shop", "")}</a>`).join("")}</div>
     </div>
   </article>`;
 }
@@ -79,9 +80,10 @@ function productCard(p) {
 function renderChrome(active) {
   const hdr = document.getElementById("site-header");
   if (hdr) hdr.innerHTML = `
+  <div class="topbar">Mua qua link Vun Vén — <b>giá không đổi</b>, bạn không mất thêm đồng nào · Deal mới cập nhật mỗi thứ Sáu</div>
   <header class="hdr">
     <div class="wrap hdr-main" style="position:relative">
-      <a href="./" class="logo">Vun Vén</a>
+      <a href="./" class="logo"><span class="mark">${ICON.leaf}</span>Vun Vén</a>
       <button class="cat-btn" id="catBtn" aria-expanded="false">${ICON.menu} Danh mục</button>
       <div class="megamenu" id="megamenu">
         ${PERSONAS.map(p => `<a href="danh-muc.html?nhom=${p.id}"><img src="${imgSrc(p.img)}" alt="">${esc(p.name)}</a>`).join("")}
@@ -89,14 +91,14 @@ function renderChrome(active) {
       <form class="search" action="danh-muc.html" role="search">
         <label class="sr" for="q">Tìm sản phẩm</label>
         <input id="q" name="q" placeholder="Tìm máy hút sữa, ghế công thái học, tai nghe…" autocomplete="off">
-        <button type="submit" aria-label="Tìm">${ICON.search}</button>
+        <button type="submit" aria-label="Tìm">${ICON.search}<span>Tìm</span></button>
       </form>
       <nav class="hdr-act">
         <a href="danh-muc.html?saved=1" aria-label="Đã lưu">${ICON.heart}<span class="lbl">Đã lưu</span><span class="count" data-saved-count></span></a>
         <a href="#nl" aria-label="Nhận deal">${ICON.mail}<span class="lbl">Nhận deal</span></a>
       </nav>
     </div>
-    <nav class="navrow"><ul class="wrap">
+    <nav class="navrow"><ul style="max-width:1320px">
       <li><a href="danh-muc.html" class="${active === "all" ? "on" : ""}">Tất cả</a></li>
       ${PERSONAS.map(p => `<li><a href="danh-muc.html?nhom=${p.id}" class="${active === p.id ? "on" : ""}">${esc(p.name)}</a></li>`).join("")}
       <li><a href="./#review">Review</a></li>
@@ -106,15 +108,15 @@ function renderChrome(active) {
   const ftr = document.getElementById("site-footer");
   if (ftr) ftr.innerHTML = `
   <section class="newsletter" id="nl">
-    <div class="wrap">
-      <h2>Nhận deal hời & review mới mỗi tuần qua email</h2>
-      <form class="nl-form" id="nlForm"><input type="email" placeholder="Nhập email của bạn" required aria-label="Email"><button>Đăng ký</button></form>
-    </div>
+    <div class="wrap"><div class="nl-box">
+      <div><h2>Deal hời mỗi thứ Sáu</h2><p>Một email mỗi tuần: món đang giảm sâu nhất của từng nhóm + review mới. Huỷ lúc nào cũng được.</p></div>
+      <form class="nl-form" id="nlForm"><input type="email" placeholder="Email của bạn" required aria-label="Email"><button>Đăng ký</button></form>
+    </div></div>
   </section>
   <footer class="ftr">
     <div class="wrap">
       <div class="fcols">
-        <div><a href="./" class="logo">Vun Vén</a><p class="about">Gợi ý đồ dùng theo đúng nhu cầu của từng người — từ mẹ bỉm sữa, dân văn phòng đến founder. Chọn kỹ, review thật.</p></div>
+        <div><a href="./" class="logo"><span class="mark">${ICON.leaf}</span>Vun Vén</a><p class="about">Gợi ý đồ dùng theo đúng nhu cầu của từng người — từ mẹ bỉm sữa, dân văn phòng đến founder. Chọn kỹ, review thật.</p></div>
         <div><h4>Mua theo nhu cầu</h4><ul>${PERSONAS.slice(0, 5).map(p => `<li><a href="danh-muc.html?nhom=${p.id}">${esc(p.name)}</a></li>`).join("")}</ul></div>
         <div><h4>&nbsp;</h4><ul>${PERSONAS.slice(5).map(p => `<li><a href="danh-muc.html?nhom=${p.id}">${esc(p.name)}</a></li>`).join("")}</ul></div>
         <div><h4>Vun Vén</h4><ul><li><a href="./#review">Bài review</a></li><li><a href="./#cach-chon">Cách tụi mình chọn đồ</a></li><li><a href="danh-muc.html?saved=1">Đồ đã lưu</a></li><li><a href="#nl">Nhận deal qua email</a></li></ul></div>
@@ -143,8 +145,9 @@ function renderChrome(active) {
    ========================================================= */
 function initHome() {
   renderChrome("home");
-  document.getElementById("circles").innerHTML = PERSONAS.map(p => `
-    <a class="circle" href="danh-muc.html?nhom=${p.id}"><span class="ph"><img src="${imgSrc(p.img)}" alt="" loading="lazy"></span>${esc(p.name)}</a>`).join("");
+  document.getElementById("whoChips").innerHTML = PERSONAS.map(p => `<a href="danh-muc.html?nhom=${p.id}">${esc(p.name)}</a>`).join("");
+  document.getElementById("tiles").innerHTML = PERSONAS.map(p => `
+    <a class="tile" href="danh-muc.html?nhom=${p.id}"><img src="${imgSrc(p.img)}" alt="" loading="lazy"><span class="lbl"><b>${esc(p.name)}</b><small>${p.products.length} món chọn lọc</small></span></a>`).join("");
 
   let cur = PERSONAS[0].id;
   const tabs = document.getElementById("tabs");
@@ -200,6 +203,7 @@ function initListing() {
   const draw = () => {
     const per = personaById(st.nhom);
     const head = document.getElementById("listHead");
+    head.className = "list-hero";
     let title = per ? `Đồ cho ${per.name}` : "Tất cả sản phẩm", desc = per ? per.desc : "Toàn bộ sản phẩm được Vun Vén chọn lọc cho 10 nhóm nhu cầu.";
     if (st.q) { title = `Kết quả cho “${st.q}”`; desc = per ? `Trong nhóm ${per.name}.` : "Tìm trong tất cả nhóm."; }
     if (st.saved) { title = "Đồ bạn đã lưu"; desc = "Bấm vào trái tim trên mỗi sản phẩm để lưu lại xem sau. Danh sách lưu trên trình duyệt này."; }
@@ -257,10 +261,12 @@ function initReview() {
       </div>
       <div class="buybox">
         ${p.badge ? `<span class="tag">${esc(p.badge)}</span>` : ""}
-        <div class="bprice"><b>${fmt(p.price)}</b>${p.oldPrice ? `<s>${fmt(p.oldPrice)}</s><em>Giảm ${d}%</em>` : ""}</div>
-        <div class="note">Giá tham khảo, có thể thay đổi theo voucher và thời điểm.</div>
         <h1>${esc(p.name)}</h1>
-        <div class="by">${starHTML(p.rating)} <b>${p.rating}</b> <span style="color:var(--soft)">(${p.reviews.toLocaleString("vi-VN")} đánh giá trên sàn)</span> · <span>Vun Vén chấm <b>${r.score}/10</b></span></div>
+        <div class="by">${starHTML(p.rating)} <b>${p.rating}</b> <span>(${p.reviews.toLocaleString("vi-VN")} đánh giá trên sàn)</span> · <span>Vun Vén chấm <b>${r.score}/10</b></span></div>
+        <div class="pricebox">
+          <div class="bprice"><b>${fmt(p.price)}</b>${p.oldPrice ? `<em>-${d}%</em><s>${fmt(p.oldPrice)}</s>` : ""}</div>
+          <div class="note">Giá tham khảo, có thể thay đổi theo voucher và thời điểm.</div>
+        </div>
         <div class="buybtns">
           ${shops.map((k, i) => `<a class="btn block ${i === 0 ? "dark" : ""}" href="${esc(p.link[k])}" ${EXT}>Xem giá trên ${SHOPS[k].name}</a>`).join("")}
           <button class="save-btn ${Saved.has(p.id) ? "on" : ""}" data-save="${p.id}">${ICON.heart} Lưu lại xem sau</button>
@@ -295,10 +301,10 @@ function initReview() {
       </article>
       <aside>
         <div class="scorecard">
-          <div class="big"><b>${r.score}</b><span>/10<br>Điểm Vun Vén</span></div>
+          <div class="big"><b>${r.score}</b><span><strong>Điểm Vun Vén</strong>trên thang 10</span></div>
           <div class="bars">${Object.entries(r.scores).map(([k, v]) => `<div class="bar"><span>${esc(k)}</span><i style="--v:${v}"></i><b>${v}</b></div>`).join("")}</div>
           <div class="verdict"><h4>Kết luận</h4>${esc(r.verdict)}</div>
-          <div style="margin-top:16px">${shops.length ? `<a class="btn block brand" href="${esc(p.link[shops[0]])}" ${EXT}>Xem giá trên ${SHOPS[shops[0]].name}</a>` : ""}</div>
+          <div style="margin-top:16px">${shops.length ? `<a class="btn block gold" href="${esc(p.link[shops[0]])}" ${EXT}>Xem giá trên ${SHOPS[shops[0]].name}</a>` : ""}</div>
         </div>
       </aside>
     </div>
