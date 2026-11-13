@@ -11,7 +11,8 @@ const ICON = {
   shield: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5" stroke-linecap="round"/></svg>',
   book: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5z"/><path d="M4 21a2 2 0 0 1 2-2h13v2H6"/><path d="M9 7h6M9 11h6" stroke-linecap="round"/></svg>',
   tag: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>',
-  leaf: '<svg viewBox="0 0 24 24"><g fill="#fff" opacity=".96"><circle cx="12" cy="6.6" r="3.5"/><circle cx="17.1" cy="10.3" r="3.5"/><circle cx="15.2" cy="16.3" r="3.5"/><circle cx="8.8" cy="16.3" r="3.5"/><circle cx="6.9" cy="10.3" r="3.5"/></g><circle cx="12" cy="12" r="2.6" fill="#E9C38E"/></svg>',
+  leaf: '<svg viewBox="0 0 24 24"><circle cx="12" cy="15.6" r="5.6" fill="#F3D3A1"/><circle cx="12" cy="15.6" r="4.3" fill="none" stroke="#fff" stroke-width=".9" opacity=".85"/><text x="12" y="18" text-anchor="middle" font-family="Be Vietnam Pro,Arial,sans-serif" font-weight="800" font-size="6.6" fill="#8A3456">đ</text><path d="M12 10.2V6.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><path d="M12 8C10.5 5.3 8.2 4.5 6 4.9c.3 2.6 2.6 4.2 6 3.1z" fill="#fff"/><path d="M12 7.1c1.3-2.8 3.5-3.9 6-3.5-.2 2.7-2.4 4.5-6 3.5z" fill="#F3D3A1"/></svg>',
+  scale: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M7 20h10M5 7h14"/><path d="m5 7-3 6a3 3 0 0 0 6 0L5 7zM19 7l-3 6a3 3 0 0 0 6 0l-3-6z"/></svg>',
   filter: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>'
 };
 
@@ -23,13 +24,20 @@ const mfmt = n => n >= 1e6 ? (n / 1e6).toFixed(n % 1e6 ? 1 : 0).replace(".", ","
 const kfmt = n => n >= 1000 ? (n / 1000).toFixed(1).replace(".", ",").replace(",0", "") + "k" : String(n);
 const off = p => p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
 const starHTML = (r, cls = "") => `<span class="stars ${cls}" aria-label="${r} trên 5 sao"><i style="width:${r / 5 * 100}%"></i></span>`;
+/* Tính giá rẻ nhất từ bảng giá từng sàn */
+PERSONAS.forEach(per => per.products.forEach(p => {
+  const offers = Object.entries(p.prices || {}).filter(([k, v]) => v && p.link && p.link[k]).sort((a, b) => a[1] - b[1]);
+  p.offers = offers;
+  if (offers.length) { p.price = offers[0][1]; p.bestShop = offers[0][0]; p.maxPrice = offers[offers.length - 1][1]; }
+}));
 const ALL = PERSONAS.flatMap(per => per.products.map(p => ({ ...p, persona: per.id })));
 const productById = id => ALL.find(p => p.id === id);
 const personaById = id => PERSONAS.find(p => p.id === id);
 const reviewById = id => REVIEWS.find(r => r.id === id);
 const shopsOf = p => Object.keys(SHOPS).filter(k => p.link && p.link[k]);
-const mainHref = p => p.review ? `review.html?id=${p.review}` : (p.link[shopsOf(p)[0]] || "#");
-const isExternal = p => !p.review;
+const mainHref = p => `san-pham.html?id=${p.id}`;
+const isExternal = () => false;
+const gap = p => (p.maxPrice || p.price) - p.price;
 const EXT = 'target="_blank" rel="nofollow sponsored noopener"';
 
 /* ---------- saved (yêu thích) ---------- */
@@ -72,10 +80,25 @@ function productCard(p) {
       <div class="rate">${starHTML(p.rating)} <b>${p.rating}</b> <span>· ${kfmt(p.reviews)} đánh giá</span></div>
       <div class="price"><b>${fmt(p.price)}</b>${p.oldPrice ? `<em>-${d}%</em><s>${fmt(p.oldPrice)}</s>` : ""}</div>
       ${p.oldPrice ? `<div class="save">Tiết kiệm ${mfmt(p.oldPrice - p.price)} so với giá gốc</div>` : ""}
-      <div class="pmeta"><span>${esc(p.shop)}</span>${p.freeship ? `<span>·</span><span class="ship">Freeship</span>` : ""}</div>
-      <div class="shopline">${shops.map(k => `<a href="${esc(p.link[k])}" ${EXT} aria-label="Mua trên ${SHOPS[k].name}">${SHOPS[k].name.replace(" Shop", "")}</a>`).join("")}</div>
+      <div class="pmeta"><span>Rẻ nhất ở <b>${SHOPS[p.bestShop].name}</b></span>${p.freeship ? `<span>·</span><span class="ship">Freeship</span>` : ""}</div>
+      <a class="cmp-btn" href="${mainHref(p)}">${ICON.scale}${p.offers.length > 1 ? `So giá ${p.offers.length} sàn${gap(p) ? ` · chênh ${mfmt(gap(p))}` : ""}` : "Xem chi tiết"}</a>
     </div>
   </article>`;
+}
+
+/* ---------- bảng so giá ---------- */
+function compareTable(p) {
+  return `
+  <div class="cmp-table">
+    <div class="cmp-h"><b>${ICON.scale} So giá ${p.offers.length} sàn</b><span>Cập nhật ${PRICE_UPDATED}</span></div>
+    ${p.offers.map(([k, v], i) => `
+    <a class="cmp-row ${i === 0 ? "best" : ""}" href="${esc(p.link[k])}" ${EXT}>
+      <span class="sn">${SHOPS[k].name}${i === 0 && p.offers.length > 1 ? `<em>Rẻ nhất</em>` : ""}${p.notes && p.notes[k] ? `<small>${esc(p.notes[k])}</small>` : ""}</span>
+      <span class="pr"><b>${fmt(v)}</b>${i ? `<small>đắt hơn ${mfmt(v - p.price)}</small>` : p.offers.length > 1 ? `<small>tiết kiệm tới ${mfmt(gap(p))}</small>` : ""}</span>
+      <span class="go">Đến sàn ›</span>
+    </a>`).join("")}
+    <p class="cmp-note">Giá trên sàn đổi theo giờ và voucher — bấm vào để xem giá mới nhất trước khi đặt.</p>
+  </div>`;
 }
 
 /* ---------- header & footer ---------- */
@@ -231,7 +254,7 @@ function initListing() {
       priceOk(st.price, p.price) &&
       (!st.shops.length || st.shops.some(k => p.link[k])) &&
       (!st.top || p.rating >= 4.7) && (!st.ship || p.freeship) && (!st.sale || p.oldPrice));
-    const sorters = { low: (a, b) => a.price - b.price, high: (a, b) => b.price - a.price, rate: (a, b) => b.rating - a.rating || b.reviews - a.reviews, pop: (a, b) => b.reviews - a.reviews };
+    const sorters = { low: (a, b) => a.price - b.price, high: (a, b) => b.price - a.price, rate: (a, b) => b.rating - a.rating || b.reviews - a.reviews, pop: (a, b) => b.reviews - a.reviews, gap: (a, b) => gap(b) - gap(a) };
     if (sorters[st.sort]) list = [...list].sort(sorters[st.sort]);
     document.getElementById("resultCount").textContent = `${list.length} sản phẩm`;
     document.getElementById("listGrid").innerHTML = list.length ? list.map(productCard).join("")
@@ -275,17 +298,16 @@ function initReview() {
         <h1>${esc(p.name)}</h1>
         <div class="by">${starHTML(p.rating)} <b>${p.rating}</b> <span>(${p.reviews.toLocaleString("vi-VN")} đánh giá trên sàn)</span> · <span>Vun Vén chấm <b>${r.score}/10</b></span></div>
         <div class="pricebox">
+          <div class="note" style="margin:0 0 2px">Giá tốt nhất hiện tại · ${SHOPS[p.bestShop].name}</div>
           <div class="bprice"><b>${fmt(p.price)}</b>${p.oldPrice ? `<em>-${d}%</em><s>${fmt(p.oldPrice)}</s>` : ""}</div>
-          <div class="note">Giá tham khảo, có thể thay đổi theo voucher và thời điểm.</div>
         </div>
+        ${compareTable(p)}
         <div class="buybtns">
-          <div class="cmp">So giá trước khi mua — bấm từng sàn để xem voucher đang có:</div>
-          ${shops.map((k, i) => `<a class="btn block ${i === 0 ? "dark" : ""}" href="${esc(p.link[k])}" ${EXT}>Xem giá trên ${SHOPS[k].name}</a>`).join("")}
           <button class="save-btn ${Saved.has(p.id) ? "on" : ""}" data-save="${p.id}">${ICON.heart} Lưu lại xem sau</button>
         </div>
         <ul class="hl">
           <li>${ICON.check}<span><b>Hợp với:</b> ${esc(r.fitFor.join(", ").toLowerCase())}</span></li>
-          <li>${ICON.tag}<span>Bán bởi <b>${esc(p.shop)}</b>${p.freeship ? " · Freeship" : ""}</span></li>
+          <li>${ICON.tag}<span>Rẻ nhất hiện tại ở <b>${SHOPS[p.bestShop].name}</b>${p.freeship ? " · Freeship" : ""}</span></li>
           <li>${ICON.book}<span>Bài review ${r.readTime} phút đọc · cập nhật ${r.date}</span></li>
         </ul>
         <details open><summary>Mẹo mua rẻ hơn</summary><div class="dc"><ul class="tips-ul">${r.saveTips.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div></details>
@@ -318,7 +340,7 @@ function initReview() {
           <div class="big"><b>${r.score}</b><span><strong>Điểm Vun Vén</strong>trên thang 10</span></div>
           <div class="bars">${Object.entries(r.scores).map(([k, v]) => `<div class="bar"><span>${esc(k)}</span><i style="--v:${v}"></i><b>${v}</b></div>`).join("")}</div>
           <div class="verdict"><h4>Kết luận</h4>${esc(r.verdict)}</div>
-          <div style="margin-top:16px">${shops.length ? `<a class="btn block gold" href="${esc(p.link[shops[0]])}" ${EXT}>Xem giá trên ${SHOPS[shops[0]].name}</a>` : ""}</div>
+          <div style="margin-top:16px"><a class="btn block gold" href="${esc(p.link[p.bestShop])}" ${EXT}>Mua ở sàn rẻ nhất · ${fmt(p.price)}</a></div>
         </div>
       </aside>
     </div>
@@ -332,8 +354,59 @@ function initReview() {
       <div class="posts">${REVIEWS.filter(x => x.id !== r.id).map(x => { const xp = productById(x.product), xper = personaById(xp.persona); return `<a class="post" href="review.html?id=${x.id}"><div class="ph"><img src="${imgSrc(xp.img)}" alt="" loading="lazy"></div><div class="b"><span class="kicker">Review · ${esc(xper.name)}</span><h3>${esc(x.title)}</h3><div class="m"><span class="score-chip">${x.score}/10</span><span>${x.readTime} phút đọc</span></div></div></a>`; }).join("")}</div>
     </section>
   </div>
-  ${shops.length ? `<div class="sticky-buy"><b>${fmt(p.price)}</b><a class="btn dark" href="${esc(p.link[shops[0]])}" ${EXT}>Xem trên ${SHOPS[shops[0]].name}</a></div>` : ""}`;
+  <div class="sticky-buy"><b>${fmt(p.price)}</b><a class="btn dark" href="${esc(p.link[p.bestShop])}" ${EXT}>Rẻ nhất ở ${SHOPS[p.bestShop].name}</a></div>`;
+}
+
+/* =========================================================
+   TRANG SẢN PHẨM + SO GIÁ (mọi sản phẩm)
+   ========================================================= */
+function initProduct() {
+  const p = productById(new URLSearchParams(location.search).get("id")) || ALL[0];
+  const per = personaById(p.persona), r = p.review && reviewById(p.review), d = off(p);
+  renderChrome(per.id);
+  document.title = `So giá ${p.name} — Vun Vén`;
+  const related = ALL.filter(x => x.persona === per.id && x.id !== p.id);
+  const rank = per.products.findIndex(x => x.id === p.id) + 1;
+  document.getElementById("app").innerHTML = `
+  <div class="wrap">
+    <div class="crumbs"><a href="./">Trang chủ</a> › <a href="danh-muc.html?nhom=${per.id}">${esc(per.name)}</a> › So giá</div>
+    <div class="pdp">
+      <div class="gallery">
+        <div class="main"><img src="${imgSrc(p.img)}" alt="${esc(p.name)}"></div>
+        <button class="heart ${Saved.has(p.id) ? "on" : ""}" data-save="${p.id}" aria-label="Lưu">${ICON.heart}</button>
+      </div>
+      <div class="buybox">
+        ${p.badge ? `<span class="tag">${esc(p.badge)}</span>` : ""}
+        <h1>${esc(p.name)}</h1>
+        <div class="by">${starHTML(p.rating)} <b>${p.rating}</b> <span>(${p.reviews.toLocaleString("vi-VN")} đánh giá trên sàn)</span></div>
+        <div class="pricebox">
+          <div class="note" style="margin:0 0 2px">Giá tốt nhất hiện tại · ${SHOPS[p.bestShop].name}</div>
+          <div class="bprice"><b>${fmt(p.price)}</b>${p.oldPrice ? `<em>-${d}%</em><s>${fmt(p.oldPrice)}</s>` : ""}</div>
+        </div>
+        ${compareTable(p)}
+        <div class="buybtns">
+          ${r ? `<a class="btn block" href="review.html?id=${r.id}">${ICON.book} Đọc review trước khi mua · ${r.score}/10</a>` : ""}
+          <button class="save-btn ${Saved.has(p.id) ? "on" : ""}" data-save="${p.id}">${ICON.heart} Lưu lại, đợi giá tốt hơn</button>
+        </div>
+        <ul class="hl">
+          <li>${ICON.check}<span><b>Vì sao đáng mua:</b> ${esc(p.why)}</span></li>
+          <li>${ICON.tag}<span>Món <b>#${rank}/${per.products.length}</b> nên mua trước trong bộ <a href="danh-muc.html?nhom=${per.id}" style="text-decoration:underline">${esc(per.name)}</a></span></li>
+        </ul>
+        <details open><summary>Trước khi mua, tự hỏi…</summary><div class="dc"><ul class="tips-ul">
+          <li>Mình đã có món nào làm được việc tương tự chưa?</li>
+          <li>Nếu đợi tới ngày đôi (11.11, 12.12) có rẻ hơn không?</li>
+          <li>Có thể mượn, thuê hoặc mua lại đồ cũ không?</li>
+        </ul></div></details>
+        <details><summary>Đừng phí tiền vào… (bộ ${esc(per.name)})</summary><div class="dc"><ul class="tips-ul">${per.skip.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div></details>
+      </div>
+    </div>
+    <section class="sec">
+      <div class="sec-title"><h2>Cùng bộ “${esc(per.name)}”</h2><a href="danh-muc.html?nhom=${per.id}">Xem tất cả</a></div>
+      <div class="grid g4">${related.slice(0, 4).map(productCard).join("")}</div>
+    </section>
+  </div>
+  <div class="sticky-buy"><b>${fmt(p.price)}</b><a class="btn dark" href="${esc(p.link[p.bestShop])}" ${EXT}>Rẻ nhất ở ${SHOPS[p.bestShop].name}</a></div>`;
 }
 
 /* ---------- khởi động theo trang ---------- */
-({ home: initHome, listing: initListing, review: initReview })[document.body.dataset.page]?.();
+({ home: initHome, listing: initListing, review: initReview, product: initProduct })[document.body.dataset.page]?.();

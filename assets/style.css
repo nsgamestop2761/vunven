@@ -355,6 +355,30 @@ td:last-child{color:var(--ink);font-weight:500}
 .savebox ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14.5px}
 .cmp{font-size:13px;color:var(--muted);margin-bottom:2px}
 
+/* ---------- so giá ---------- */
+.pmeta b{color:var(--ink);font-weight:600}
+.cmp-btn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;padding:8px 10px;border-radius:999px;border:1px solid var(--blush);background:var(--paper);color:var(--rose-dark);font-size:12.5px;font-weight:700;transition:.15s}
+.cmp-btn svg{width:15px;height:15px}
+.cmp-btn:hover{background:var(--rose);border-color:var(--rose);color:#fff}
+.cmp-table{border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:14px;background:#fff}
+.cmp-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;background:var(--paper);font-size:13px;color:var(--soft)}
+.cmp-h b{display:flex;align-items:center;gap:8px;color:var(--ink);font-size:14.5px}
+.cmp-h svg{width:18px;height:18px;color:var(--rose)}
+.cmp-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;padding:13px 16px;border-top:1px solid var(--line);transition:background .15s}
+.cmp-row:hover{background:var(--paper)}
+.cmp-row .sn{font-weight:700;font-size:15px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.cmp-row .sn em{font-style:normal;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;background:var(--rose);color:#fff;padding:2px 8px;border-radius:999px}
+.cmp-row .sn small{flex-basis:100%;font-weight:500;font-size:12.5px;color:var(--muted)}
+.cmp-row .pr{text-align:right}
+.cmp-row .pr b{display:block;font-size:16px}
+.cmp-row .pr small{font-size:12px;color:var(--soft)}
+.cmp-row.best{background:linear-gradient(90deg,var(--rose-soft),#fff)}
+.cmp-row.best .pr b{color:var(--rose)}
+.cmp-row.best .pr small{color:var(--rose);font-weight:600}
+.cmp-row .go{font-size:13px;font-weight:700;color:var(--rose);white-space:nowrap}
+.cmp-note{margin:0;padding:10px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--soft)}
+.buybtns .btn svg{width:18px;height:18px}
+
 /* ---------- responsive ---------- */
 @media (max-width:1200px){
   .grid{grid-template-columns:repeat(4,1fr)}
@@ -382,6 +406,9 @@ td:last-child{color:var(--ink);font-weight:500}
   .megamenu{left:24px}
 }
 @media (max-width:720px){
+  .cmp-row{grid-template-columns:1fr auto;padding:12px 14px}
+  .cmp-row .go{display:none}
+  .cmp-btn{font-size:12px;padding:7px 8px}
   .tips{grid-template-columns:1fr}
   .wrap{padding:0 16px}
   .topbar{font-size:12px}
