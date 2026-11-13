@@ -11,7 +11,7 @@ const ICON = {
   shield: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5" stroke-linecap="round"/></svg>',
   book: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5z"/><path d="M4 21a2 2 0 0 1 2-2h13v2H6"/><path d="M9 7h6M9 11h6" stroke-linecap="round"/></svg>',
   tag: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>',
-  leaf: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 20c0-6 2-10 8-12-1 6-3 10-8 12z" fill="#F2B33D"/><path d="M12 20C12 13 9.5 9 4 7c.5 6.5 3 11 8 13z" fill="#fff"/><path d="M12 21v-6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>',
+  leaf: '<svg viewBox="0 0 24 24"><g fill="#fff" opacity=".96"><circle cx="12" cy="6.6" r="3.5"/><circle cx="17.1" cy="10.3" r="3.5"/><circle cx="15.2" cy="16.3" r="3.5"/><circle cx="8.8" cy="16.3" r="3.5"/><circle cx="6.9" cy="10.3" r="3.5"/></g><circle cx="12" cy="12" r="2.6" fill="#E9C38E"/></svg>',
   filter: '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>'
 };
 

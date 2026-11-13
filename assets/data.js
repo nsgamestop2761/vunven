@@ -10,6 +10,7 @@
    - freeship   : true nếu shop có freeship
    - link       : link affiliate từng sàn. Để "" thì sàn đó tự ẩn.
    - review     : id bài review trong REVIEWS (nếu có)
+   Thứ tự các nhóm: sửa PERSONA_ORDER ở cuối file.
    ========================================================= */
 
 const SHOPS = {
@@ -252,3 +253,7 @@ const REVIEWS = [
     notFor: ["Người hay gọi điện ở nơi đông người", "Audiophile cần âm thanh trung tính"]
   }
 ];
+
+/* Thứ tự hiển thị các nhóm (ưu tiên khách nữ). Muốn đổi thứ tự thì sửa danh sách này. */
+const PERSONA_ORDER = ["me-bim", "skincare", "van-phong", "o-rieng", "bieu-bo-me", "sinh-vien", "gymer", "du-lich", "khoi-nghiep", "game-thu"];
+PERSONAS.sort((a, b) => PERSONA_ORDER.indexOf(a.id) - PERSONA_ORDER.indexOf(b.id));
