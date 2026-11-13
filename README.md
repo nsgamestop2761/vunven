@@ -5,7 +5,7 @@ danh mục tròn, lưới sản phẩm có ảnh, giá, % giảm, sao, nút lưu
 và trang review dạng trang chi tiết sản phẩm.
 
 10 nhóm nhu cầu: Mẹ bỉm sữa · Dân khởi nghiệp · Dân văn phòng · Sinh viên/Gen Z · Gymer ·
-Tín đồ skincare · Mới ra ở riêng · Dân xê dịch · Game thủ · Quà biếu bố mẹ — 50 sản phẩm, 3 bài review mẫu.
+Tín đồ skincare · Cô dâu sắp cưới · Mới ra ở riêng · Dân xê dịch · Quà biếu bố mẹ — 50 sản phẩm, 3 bài review mẫu.
 
 ## Các trang
 

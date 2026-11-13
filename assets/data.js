@@ -157,20 +157,20 @@ const PERSONAS = [
     ]
   },
   {
-    id: "game-thu", name: "Game thủ", short: "Gaming", img: "cat-game-thu",
-    desc: "Phản hồi nhanh, ngồi lâu không mỏi, góc máy lung linh. Bộ setup tầm trung mà cảm giác cao cấp.",
-    needs: ["Độ trễ thấp", "Ngồi lâu", "Đẹp góc máy"],
+    id: "co-dau", name: "Cô dâu sắp cưới", short: "Cưới hỏi", img: "cat-co-dau",
+    desc: "Từ dạm ngõ đến ngày cưới có cả trăm thứ phải lo. Đây là những món giúp cô dâu xinh hơn, đỡ lo hơn và giữ lại kỷ niệm đẹp.",
+    needs: ["Xinh ngày cưới", "Đỡ tốn kém", "Kỷ niệm đẹp"],
     products: [
-      { id: "phim-co", name: "Bàn phím cơ 75% hot-swap, 3 chế độ kết nối", img: "gt-ban-phim", price: 1290000, oldPrice: 1590000, rating: 4.8, reviews: 1980, badge: "Bán chạy", shop: "Shopee Mall", freeship: true,
-        why: "Thay switch không cần hàn, gõ êm, dùng được dây, Bluetooth và 2.4G.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "keycap", name: "Bộ keycap PBT double-shot phối màu retro", img: "gt-keycap", price: 390000, rating: 4.7, reviews: 760, badge: "", shop: "TikTok Shop", freeship: true,
-        why: "Nhựa PBT không bóng dầu, chữ không phai. Đổi mới bàn phím với giá mềm.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "tai-nghe-game", name: "Tai nghe chụp tai gaming, mic khử ồn tháo rời", img: "gt-tai-nghe", price: 690000, rating: 4.5, reviews: 2430, badge: "", shop: "Shopee Mall", freeship: true,
-        why: "Nghe rõ hướng bước chân địch, mic khử ồn cho team voice.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "tay-cam", name: "Tay cầm chơi game không dây cho PC & điện thoại", img: "gt-tay-cam", price: 590000, oldPrice: 750000, rating: 4.6, reviews: 1890, badge: "Đáng tiền", shop: "LazMall", freeship: true,
-        why: "Kết nối Bluetooth, rung kép, pin 20 giờ — chơi game console trên PC.", link: { shopee: "#", lazada: "#", tiktok: "" } },
-      { id: "led", name: "Dải đèn LED RGB 5m đổi màu theo nhạc", img: "gt-led", price: 220000, rating: 4.5, reviews: 4210, badge: "", shop: "TikTok Shop", freeship: true,
-        why: "Góc máy lên đời chỉ với hơn 200k, điều khiển qua app.", link: { shopee: "#", lazada: "", tiktok: "#" } }
+      { id: "hoa-cuoi", name: "Hoa cưới cầm tay hoa lụa cao cấp tông hồng pastel", img: "cd-hoa-cuoi", price: 750000, oldPrice: 950000, rating: 4.9, reviews: 1240, badge: "Bán chạy", shop: "Shopee Mall", freeship: true,
+        why: "Hoa lụa không héo, chụp ảnh cưới, ăn hỏi, đãi tiệc đều dùng được — xong còn giữ làm kỷ niệm.", link: { shopee: "#", lazada: "", tiktok: "#" } },
+      { id: "nhan-cuoi", name: "Cặp nhẫn cưới vàng 14K trơn, khắc tên miễn phí", img: "cd-nhan", price: 6490000, oldPrice: 7290000, rating: 4.8, reviews: 860, badge: "Đáng tiền", shop: "LazMall", freeship: true,
+        why: "Kiểu trơn cổ điển, đeo hằng ngày không vướng. Nên chọn shop có giấy kiểm định và khắc tên miễn phí.", link: { shopee: "#", lazada: "#", tiktok: "" } },
+      { id: "bong-tai", name: "Bông tai bạc 925 đính đá xanh cho cô dâu", img: "cd-bong-tai", price: 590000, rating: 4.7, reviews: 1530, badge: "", shop: "TikTok Shop", freeship: true,
+        why: "Điểm nhấn \"something blue\" cho ngày cưới. Bạc 925 không gây kích ứng, đeo cả ngày không nặng tai.", link: { shopee: "#", lazada: "", tiktok: "#" } },
+      { id: "giay-cuoi", name: "Giày cao gót mũi nhọn 7cm êm chân cho tiệc cưới", img: "cd-giay", price: 690000, oldPrice: 850000, rating: 4.6, reviews: 2210, badge: "", shop: "Shopee Mall", freeship: true,
+        why: "Gót 7cm vừa đủ thanh lịch mà đứng chào khách cả buổi vẫn không đau chân. Lót đệm êm.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
+      { id: "nen-thom", name: "Set nến thơm sáp đậu nành trang trí phòng tân hôn", img: "cd-nen", price: 290000, rating: 4.8, reviews: 3120, badge: "Bán chạy", shop: "TikTok Shop", freeship: true,
+        why: "Mùi hoa hồng, vani dịu nhẹ. Thắp trong phòng tân hôn hoặc làm quà cảm ơn phù dâu đều xinh.", link: { shopee: "#", lazada: "", tiktok: "#" } }
     ]
   },
   {
@@ -255,5 +255,5 @@ const REVIEWS = [
 ];
 
 /* Thứ tự hiển thị các nhóm (ưu tiên khách nữ). Muốn đổi thứ tự thì sửa danh sách này. */
-const PERSONA_ORDER = ["me-bim", "skincare", "van-phong", "o-rieng", "bieu-bo-me", "sinh-vien", "gymer", "du-lich", "khoi-nghiep", "game-thu"];
+const PERSONA_ORDER = ["me-bim", "skincare", "co-dau", "van-phong", "o-rieng", "bieu-bo-me", "sinh-vien", "gymer", "du-lich", "khoi-nghiep"];
 PERSONAS.sort((a, b) => PERSONA_ORDER.indexOf(a.id) - PERSONA_ORDER.indexOf(b.id));
