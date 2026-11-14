@@ -7,8 +7,8 @@
                   Trang tự tìm sàn rẻ nhất. Nhớ cập nhật PRICE_UPDATED bên dưới mỗi lần sửa giá.
    - notes      : (tuỳ chọn) ghi chú từng sàn, vd { shopee: "Voucher giảm 50k" }
    - oldPrice   : giá gốc để hiện % giảm (bỏ trống nếu không giảm)
-   - rating     : điểm sao            - reviews : số lượt đánh giá trên sàn
-     ⚠️ rating / reviews / giá hiện là SỐ MẪU — hãy thay bằng số thật từ sàn.
+   - rating     : điểm sao            - reviews : số lượt đánh giá trên sàn   (số mẫu — thay bằng số thật)
+   - sold       : số đã bán (lấy thật từ sàn) — có `sold` thì trang hiện "đã bán" thay cho sao/đánh giá
    - badge      : "Bán chạy" | "Đáng tiền" | "" ...
    - freeship   : true nếu shop có freeship
    - link       : link affiliate từng sàn. Để "" thì sàn đó tự ẩn.
@@ -33,17 +33,17 @@ const PERSONAS = [
     needs: ["Rảnh tay", "An toàn cho bé", "Dễ vệ sinh"],
     skip: ["Máy hâm sữa riêng — một ca nước ấm 40°C làm tốt y như vậy.", "Giày tập đi cho bé dưới 12 tháng — bé chưa cần, để chân trần còn tốt hơn.", "Quần áo sơ sinh size 0–3 tháng quá 5 bộ — bé lớn rất nhanh, xin lại đồ cũ cũng được."],
     products: [
-      { id: "may-hut-sua", name: "Máy hút sữa điện đôi không dây, 9 mức lực hút", img: "mb-may-hut-sua", prices: { shopee: 1290000, lazada: 1359000, tiktok: 1399000 }, oldPrice: 1590000, rating: 4.8, reviews: 2134, badge: "Bán chạy", freeship: true, review: "may-hut-sua",
+      { id: "may-hut-sua", name: "Máy hút sữa điện đôi EMOON, phễu silicon", img: "mb-may-hut-sua", prices: { tiktok: 1198999 }, sold: 19920, badge: "Bán chạy", freeship: false, review: "may-hut-sua",
         notes: { shopee: "Voucher Mall giảm thêm 50k cho đơn từ 1 triệu", tiktok: "Giá trong phiên livestream, ngoài live có thể cao hơn" },
-        why: "Đeo gọn trong áo, vừa hút vừa ru con. Chọn loại có từ 9 mức lực hút trở lên.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "body-gau", name: "Bộ body liền thân lót nỉ hình gấu cho bé 0–24 tháng", img: "mb-body-gau", prices: { shopee: 189000, tiktok: 199000 }, oldPrice: 249000, rating: 4.9, reviews: 5310, badge: "Bán chạy", freeship: true,
-        why: "Cotton lót nỉ mềm, cúc bấm dọc người nên thay tã không cần cởi hết đồ.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "chan-u", name: "Chăn ủ sơ sinh sợi tre siêu mềm 2 lớp", img: "mb-chan-u", prices: { shopee: 245000, lazada: 259000 }, rating: 4.7, reviews: 1288, badge: "", freeship: false,
-        why: "Sợi tre thấm hút, kháng khuẩn tự nhiên. Ủ bé ngủ sâu hơn, càng giặt càng mềm.", link: { shopee: "#", lazada: "#", tiktok: "" } },
-      { id: "do-choi", name: "Set đồ chơi phát triển giác quan cho bé 6–18 tháng", img: "mb-do-choi", prices: { shopee: 369000, tiktok: 359000 }, oldPrice: 420000, rating: 4.6, reviews: 876, badge: "Đáng tiền", freeship: true,
-        why: "Thú bông, sách vải, xúc xắc trong một set. Chất liệu đạt chuẩn an toàn cho bé gặm.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "kem-ran", name: "Kem dưỡng ngừa rạn da cho mẹ bầu & sau sinh 150ml", img: "mb-kem-ran", prices: { shopee: 349000, lazada: 349000, tiktok: 320000 }, rating: 4.5, reviews: 3402, badge: "", freeship: true,
-        why: "Thoa từ tháng thứ 4 thai kỳ. Chọn loại không mùi để bé không bị kích ứng.", link: { shopee: "#", lazada: "#", tiktok: "#" } }
+        why: "Đeo gọn trong áo, vừa hút vừa ru con. Chọn loại có từ 9 mức lực hút trở lên.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "body-gau", name: "Body lông nhung liền mũ cho bé", img: "mb-body-gau", prices: { tiktok: 137409 }, sold: 184267, badge: "Bán chạy", freeship: false,
+        why: "Cotton lót nỉ mềm, cúc bấm dọc người nên thay tã không cần cởi hết đồ.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "chan-u", name: "Khăn xô muslin 4 lớp làm ủ cho bé", img: "mb-chan-u", prices: { tiktok: 164640 }, sold: 75728, badge: "", freeship: false,
+        why: "Khăn xô muslin 4 lớp mềm, thấm hút — vừa làm khăn tắm vừa quấn ủ bé, một món dùng hai việc.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "do-choi", name: "Combo 10 đồ chơi xếp gỗ cho bé", img: "mb-do-choi", prices: { tiktok: 133999 }, sold: 106613, badge: "Đáng tiền", freeship: false,
+        why: "Bộ 10 món đồ chơi xếp gỗ giúp bé luyện tay, nhận biết hình khối màu sắc — gỗ bền, chơi được nhiều năm.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "kem-ran", name: "Kem rạn da mẹ bầu LOVIN'SKIN Mama", img: "mb-kem-ran", prices: { tiktok: 210448 }, sold: 204425, badge: "", freeship: false,
+        why: "Thoa từ tháng thứ 4 thai kỳ. Chọn loại không mùi để bé không bị kích ứng.", link: { shopee: "", lazada: "", tiktok: "#" } }
     ]
   },
   {
@@ -52,15 +52,15 @@ const PERSONAS = [
     needs: ["Năng suất", "Chuyên nghiệp", "Bền bỉ"],
     skip: ["Văn phòng riêng ngay từ đầu — coworking hoặc làm ở nhà đến khi có đội.", "Phần mềm trả phí theo năm — dùng bản miễn phí đến khi thật sự thiếu tính năng.", "Màn hình thứ ba — hai màn hình là đủ cho phần lớn công việc."],
     products: [
-      { id: "ghe-cong-thai-hoc", name: "Ghế công thái học lưới, tựa đầu & tay vịn 4D", img: "kn-ghe", prices: { shopee: 3490000, lazada: 3559000 }, oldPrice: 4290000, rating: 4.8, reviews: 1532, badge: "Đáng tiền", freeship: true, review: "ghe-cong-thai-hoc",
+      { id: "ghe-cong-thai-hoc", name: "Ghế công thái học lưới, tựa đầu & tay vịn 4D", img: "kn-ghe", prices: { shopee: 3490000, lazada: 3559000 }, rating: 4.8, reviews: 1532, badge: "Đáng tiền", freeship: true, review: "ghe-cong-thai-hoc",
         notes: { lazada: "Có trả góp 0% qua thẻ tín dụng" },
         why: "Tựa thắt lưng chỉnh được, đỡ cột sống — ngồi 10 tiếng vẫn tỉnh táo.", link: { shopee: "#", lazada: "#", tiktok: "" } },
-      { id: "man-hinh", name: "Màn hình 27 inch 2K IPS, viền mỏng 3 cạnh", img: "kn-man-hinh", prices: { shopee: 4190000, lazada: 4449000 }, oldPrice: 4890000, rating: 4.7, reviews: 964, badge: "", freeship: true,
-        why: "Mở cùng lúc pitch deck, bảng tính và email. Màn 2K đủ nét để làm thiết kế cơ bản.", link: { shopee: "#", lazada: "#", tiktok: "" } },
-      { id: "gia-laptop", name: "Giá đỡ laptop nhôm nguyên khối, chỉnh 6 nấc", img: "kn-gia-laptop", prices: { shopee: 290000, tiktok: 299000 }, rating: 4.7, reviews: 4120, badge: "Bán chạy", freeship: true,
-        why: "Nâng màn hình ngang tầm mắt, đỡ gù cổ. Gập gọn bỏ balo mang đi cà phê.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "so-tay", name: "Sổ kế hoạch OKR 12 tuần, bìa da, giấy 100gsm", img: "kn-so-tay", prices: { shopee: 209000, tiktok: 189000 }, rating: 4.6, reviews: 712, badge: "", freeship: false,
-        why: "Chia mục tiêu quý thành việc từng tuần, rất hợp để theo dõi tiến độ startup.", link: { shopee: "#", lazada: "", tiktok: "#" } },
+      { id: "man-hinh", name: "Màn hình Xiaomi A27i 27 inch IPS", img: "kn-man-hinh", prices: { tiktok: 2415300 }, sold: 6952, badge: "", freeship: false,
+        why: "Màn hình 27 inch tấm nền IPS, mở cùng lúc nhiều cửa sổ làm việc — giá dễ chịu so với màn cùng cỡ.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "gia-laptop", name: "Giá đỡ laptop gập gọn", img: "kn-gia-laptop", prices: { tiktok: 74200 }, sold: 56921, badge: "Bán chạy", freeship: false,
+        why: "Nâng màn hình laptop ngang tầm mắt, đỡ gù cổ. Gập gọn bỏ balo mang đi cà phê.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "so-tay", name: "Sổ kế hoạch ngày 5 phút", img: "kn-so-tay", prices: { tiktok: 54900 }, sold: 6936, badge: "", freeship: false,
+        why: "Mỗi sáng 5 phút lên kế hoạch ngày: việc chính, việc phụ, điều biết ơn — gọn và dễ duy trì.", link: { shopee: "", lazada: "", tiktok: "#" } },
       { id: "sach", name: "Combo sách khởi nghiệp: Zero to One, Khởi nghiệp tinh gọn…", img: "kn-sach", prices: { shopee: 449000, lazada: 420000, tiktok: 449000 }, oldPrice: 560000, rating: 4.9, reviews: 2045, badge: "Kinh điển", freeship: true,
         why: "Gối đầu giường của founder: thử nghiệm nhanh, học từ khách hàng, đỡ đốt tiền.", link: { shopee: "#", lazada: "#", tiktok: "#" } }
     ]
@@ -71,14 +71,14 @@ const PERSONAS = [
     needs: ["Đỡ mỏi", "Gọn bàn", "Giá mềm"],
     skip: ["Ghế gaming trông 'xịn' — ghế công thái học lưới cùng giá ngồi tốt hơn.", "Bình nước 'thông minh' có màn hình — bình có vạch chia đã đủ nhắc uống nước.", "Đồ trang trí bàn làm việc theo trend — một chậu cây nhỏ là đủ xinh."],
     products: [
-      { id: "massage", name: "Máy massage cổ vai gáy xung điện, có chườm ấm", img: "vp-massage", prices: { shopee: 749000, lazada: 739000, tiktok: 690000 }, oldPrice: 890000, rating: 4.6, reviews: 3876, badge: "Bán chạy", freeship: true,
-        why: "15 phút giờ nghỉ trưa là vai gáy nhẹ hẳn. Nên chọn loại có chế độ chườm ấm.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "den-ban", name: "Đèn bàn kim loại phong cách Bắc Âu, bóng E27", img: "vp-den-ban", prices: { shopee: 489000, lazada: 459000 }, rating: 4.7, reviews: 1120, badge: "", freeship: false,
-        why: "Chao đèn xoay được, ánh sáng tập trung xuống bàn, không chói mắt.", link: { shopee: "#", lazada: "#", tiktok: "" } },
-      { id: "binh-nuoc", name: "Bình giữ nhiệt inox 316 dung tích 750ml, sơn nhám", img: "vp-binh-nuoc", prices: { shopee: 269000, lazada: 269000, tiktok: 250000 }, oldPrice: 320000, rating: 4.8, reviews: 6230, badge: "Bán chạy", freeship: true,
-        why: "Giữ lạnh cả ngày, sơn nhám không trơn tay. Để trên bàn cũng đẹp.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "coc-su", name: "Cốc sứ trắng 350ml có nắp, dùng được lò vi sóng", img: "vp-coc-su", prices: { shopee: 89000, tiktok: 95000 }, rating: 4.6, reviews: 980, badge: "", freeship: true,
-        why: "Cốc trà chiều tối giản, men dày giữ ấm lâu, rửa không bám màu cà phê.", link: { shopee: "#", lazada: "", tiktok: "#" } },
+      { id: "massage", name: "Máy massage cổ vai gáy hồng ngoại", img: "vp-massage", prices: { tiktok: 399000 }, sold: 72174, badge: "Bán chạy", freeship: false,
+        why: "15 phút giờ nghỉ trưa là vai gáy nhẹ hẳn. Nên chọn loại có chế độ chườm ấm.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "den-ban", name: "Đèn bàn LED chống cận Tao1501", img: "vp-den-ban", prices: { tiktok: 189000 }, sold: 37848, badge: "", freeship: false,
+        why: "Đèn LED chống cận, thân thép sơn tĩnh điện, ánh sáng dịu — làm việc tối không mỏi mắt.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "binh-nuoc", name: "Ly giữ nhiệt Candy inox 316", img: "vp-binh-nuoc", prices: { tiktok: 168499 }, sold: 448224, badge: "Bán chạy", freeship: false,
+        why: "Ly giữ nhiệt inox 316 an toàn, giữ lạnh cả ngày — uống đủ nước mà khỏi mua nước đóng chai.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "coc-su", name: "Cốc sứ tráng men uống nước", img: "vp-coc-su", prices: { tiktok: 27500 }, sold: 112529, badge: "", freeship: false,
+        why: "Cốc sứ tráng men bóng cả trong lẫn ngoài, dễ rửa, không bám màu trà cà phê.", link: { shopee: "", lazada: "", tiktok: "#" } },
       { id: "ban-phim", name: "Bàn phím không dây mỏng, kết nối 3 thiết bị", img: "vp-ban-phim", prices: { shopee: 549000, lazada: 599000 }, rating: 4.5, reviews: 1460, badge: "", freeship: true,
         why: "Gõ êm, ít tiếng ồn, chuyển nhanh giữa laptop – máy tính bảng – điện thoại.", link: { shopee: "#", lazada: "#", tiktok: "" } }
     ]
@@ -89,17 +89,17 @@ const PERSONAS = [
     needs: ["Giá sinh viên", "Đa năng", "Phòng trọ nhỏ"],
     skip: ["Tai nghe flagship 5–6 triệu — bản tầm trung dưới 1 triệu đủ cho học và nghe nhạc.", "Bàn ghế mới cho phòng trọ ngắn hạn — mua lại đồ thanh lý của khoá trên.", "Sạc dự phòng trên 20.000mAh — nặng, mang lên máy bay còn bị hạn chế."],
     products: [
-      { id: "tai-nghe-anc", name: "Tai nghe true wireless chống ồn ANC, pin 30 giờ", img: "sv-tai-nghe", prices: { shopee: 829000, lazada: 790000, tiktok: 869000 }, oldPrice: 990000, rating: 4.6, reviews: 4518, badge: "Bán chạy", freeship: true, review: "tai-nghe-anc",
+      { id: "tai-nghe-anc", name: "Tai nghe Bluetooth TRANYOO M02 giảm ồn", img: "sv-tai-nghe", prices: { tiktok: 308999 }, sold: 202875, badge: "Bán chạy", freeship: false, review: "tai-nghe-anc",
         notes: { shopee: "Tặng kèm ốp silicon" },
-        why: "Học thư viện, đi xe buýt đều yên tĩnh. Dưới 1 triệu mà có ANC là quá hời.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "noi-mini", name: "Nồi điện mini đa năng 1.5L: nấu, lẩu, hấp", img: "sv-noi-mini", prices: { shopee: 350000, tiktok: 379000 }, rating: 4.5, reviews: 2870, badge: "", freeship: true,
-        why: "Nấu mì, lẩu, luộc trứng, hấp bánh — một nồi cân hết bữa tối phòng trọ.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "den-hoc", name: "Đèn học LED chống cận, kẹp bàn, 3 chế độ màu", img: "sv-den-hoc", prices: { shopee: 280000, lazada: 309000 }, rating: 4.6, reviews: 1934, badge: "", freeship: true,
-        why: "Ánh sáng không nhấp nháy, chỉnh 3 tông màu, ôn thi xuyên đêm đỡ mỏi mắt.", link: { shopee: "#", lazada: "#", tiktok: "" } },
+        why: "Bluetooth 6.0, có giảm tiếng ồn và app chống thất lạc — đủ dùng cho học, đi xe buýt với giá dưới 400k.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "noi-mini", name: "Nồi lẩu điện mini 1,8L", img: "sv-noi-mini", prices: { tiktok: 104999 }, sold: 270420, badge: "", freeship: false,
+        why: "Nấu mì, lẩu, luộc trứng, hấp bánh — một nồi cân hết bữa tối phòng trọ.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "den-hoc", name: "Đèn học LED Monqiqi", img: "sv-den-hoc", prices: { tiktok: 78400 }, sold: 114898, badge: "", freeship: false,
+        why: "Ánh sáng không nhấp nháy, chỉnh 3 tông màu, ôn thi xuyên đêm đỡ mỏi mắt.", link: { shopee: "", lazada: "", tiktok: "#" } },
       { id: "cu-sac", name: "Củ sạc nhanh GaN 65W, 3 cổng, sạc được laptop", img: "sv-cu-sac", prices: { shopee: 429000, lazada: 409000, tiktok: 390000 }, oldPrice: 490000, rating: 4.7, reviews: 3311, badge: "Đáng tiền", freeship: true,
         why: "Một củ sạc cho cả laptop, điện thoại, tai nghe — balo nhẹ hẳn.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "balo", name: "Balo laptop 15.6 inch chống nước, ngăn chống sốc", img: "sv-balo", prices: { shopee: 420000, tiktok: 429000 }, rating: 4.5, reviews: 2210, badge: "", freeship: false,
-        why: "Ngăn chống sốc cho laptop, vải chống nước — mưa bất chợt cũng không lo.", link: { shopee: "#", lazada: "", tiktok: "#" } }
+      { id: "balo", name: "Balo DaBag Hanama đựng laptop", img: "sv-balo", prices: { tiktok: 195020 }, sold: 268395, badge: "", freeship: false,
+        why: "Ngăn chống sốc cho laptop, vải chống nước — mưa bất chợt cũng không lo.", link: { shopee: "", lazada: "", tiktok: "#" } }
     ]
   },
   {
@@ -108,16 +108,16 @@ const PERSONAS = [
     needs: ["Đo lường", "Tập tại nhà", "Phục hồi"],
     skip: ["Máy chạy bộ khi chưa tập đều — thẻ gym 3 tháng rẻ hơn và biết mình có theo nổi không.", "Thực phẩm bổ sung đắt tiền cho người mới — ăn đủ đạm từ bữa ăn trước đã.", "Đồ tập hàng hiệu — đồ thoáng khí giá vừa phải dùng y như nhau."],
     products: [
-      { id: "dong-ho", name: "Đồng hồ thông minh đo nhịp tim, SpO2, pin 10 ngày", img: "gy-dong-ho", prices: { shopee: 1190000, lazada: 1219000, tiktok: 1219000 }, oldPrice: 1490000, rating: 4.6, reviews: 2788, badge: "Bán chạy", freeship: true,
-        why: "Theo dõi nhịp tim, giấc ngủ, bước chân và hơn 100 chế độ luyện tập.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "ta-tay", name: "Bộ tạ tay bọc cao su 2×3kg + dây kháng lực", img: "gy-ta-tay", prices: { shopee: 390000, tiktok: 409000 }, rating: 4.7, reviews: 1650, badge: "Đáng tiền", freeship: true,
-        why: "Đủ cho 80% bài tập tại nhà. Bọc cao su không trầy sàn, không ồn.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "tham-yoga", name: "Thảm yoga TPE dày 8mm, 2 mặt chống trơn", img: "gy-tham-yoga", prices: { shopee: 290000, lazada: 309000, tiktok: 319000 }, rating: 4.6, reviews: 3904, badge: "", freeship: true,
-        why: "Êm gối, không mùi cao su, kèm dây đeo mang đi lớp tiện lợi.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "binh-lac", name: "Bình lắc whey 700ml có lò xo, ngăn đựng bột", img: "gy-binh-lac", prices: { shopee: 120000, lazada: 129000 }, rating: 4.4, reviews: 5120, badge: "", freeship: false,
-        why: "Lò xo đánh tan bột, nắp vặn kín không rò rỉ trong túi gym.", link: { shopee: "#", lazada: "#", tiktok: "" } },
-      { id: "giay", name: "Giày tập gym đế bằng, đế cao su chống trượt", img: "gy-giay", prices: { shopee: 650000, tiktok: 689000 }, oldPrice: 790000, rating: 4.5, reviews: 860, badge: "", freeship: true,
-        why: "Đế bằng giúp đứng vững khi squat, deadlift; thân lưới thoáng chân.", link: { shopee: "#", lazada: "", tiktok: "#" } }
+      { id: "dong-ho", name: "Vòng đeo tay Xiaomi Smart Band 11", img: "gy-dong-ho", prices: { tiktok: 1089999 }, sold: 15150, badge: "Bán chạy", freeship: false,
+        why: "Đo nhịp tim, giấc ngủ, bước chân, pin dài — đủ tính năng theo dõi tập luyện với giá chỉ bằng nửa đồng hồ thông minh.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "ta-tay", name: "Tạ ấm bọc mềm 2,5–8kg", img: "gy-ta-tay", prices: { tiktok: 121260 }, sold: 24334, badge: "Đáng tiền", freeship: false,
+        why: "Tạ ấm bọc mềm nhiều mức 2,5–8kg: tập toàn thân tại nhà, rơi xuống sàn không ồn, không trầy.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "tham-yoga", name: "Thảm yoga TPE TOPBODY", img: "gy-tham-yoga", prices: { tiktok: 118000 }, sold: 99504, badge: "", freeship: false,
+        why: "Êm gối, không mùi cao su, kèm dây đeo mang đi lớp tiện lợi.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "binh-lac", name: "Bình lắc thể thao có lò xo", img: "gy-binh-lac", prices: { tiktok: 69000 }, sold: 19203, badge: "", freeship: false,
+        why: "Lò xo đánh tan bột, nắp vặn kín không rò rỉ trong túi gym.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "giay", name: "Giày sneaker thể thao Enter Dragon", img: "gy-giay", prices: { tiktok: 426999 }, sold: 302293, badge: "", freeship: false,
+        why: "Giày sneaker thể thao êm chân, dùng được cả đi tập lẫn đi chơi — một đôi cho hai việc.", link: { shopee: "", lazada: "", tiktok: "#" } }
     ]
   },
   {
@@ -126,16 +126,16 @@ const PERSONAS = [
     needs: ["Chống nắng", "Làm sạch", "Dưỡng ẩm"],
     skip: ["Máy rửa mặt đắt tiền — đôi tay và sữa rửa mặt dịu nhẹ là đủ.", "Combo 10 bước theo trend — chống nắng + dưỡng ẩm đều đặn hiệu quả hơn.", "Mỹ phẩm size mini giá cao — tính theo ml thường đắt gấp đôi size thường."],
     products: [
-      { id: "chong-nang", name: "Kem chống nắng phổ rộng SPF50+ PA++++, kết cấu sữa", img: "sk-chong-nang", prices: { shopee: 309000, lazada: 309000, tiktok: 280000 }, oldPrice: 350000, rating: 4.8, reviews: 8920, badge: "Bán chạy", freeship: true,
-        why: "Bước quan trọng nhất của skincare. Kết cấu mỏng nhẹ, không bết, không vệt trắng.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "serum", name: "Serum Vitamin C 15% sáng da, mờ thâm 30ml", img: "sk-serum", prices: { shopee: 350000, tiktok: 369000 }, rating: 4.6, reviews: 2410, badge: "", freeship: true,
-        why: "Làm sáng da, mờ thâm. Dùng buổi sáng, trước bước kem chống nắng.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "toner", name: "Nước cân bằng không cồn cho da nhạy cảm 200ml", img: "sk-toner", prices: { shopee: 230000, lazada: 249000 }, rating: 4.7, reviews: 1780, badge: "", freeship: true,
-        why: "Cấp ẩm nhẹ, làm dịu da sau rửa mặt, không gây khô căng.", link: { shopee: "#", lazada: "#", tiktok: "" } },
-      { id: "trang-diem", name: "Bộ cọ trang điểm 8 cây lông mềm kèm túi", img: "sk-trang-diem", prices: { shopee: 209000, lazada: 199000, tiktok: 219000 }, oldPrice: 259000, rating: 4.6, reviews: 3020, badge: "Đáng tiền", freeship: true,
-        why: "Đủ cọ nền, phấn, mắt, môi. Lông mềm, không rụng sau nhiều lần giặt.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "dau-duong", name: "Dầu dưỡng da mặt chiết xuất thực vật 30ml", img: "sk-dau-duong", prices: { shopee: 390000, tiktok: 399000 }, rating: 4.5, reviews: 640, badge: "", freeship: false,
-        why: "Khoá ẩm ban đêm cho da khô, đặc biệt hợp mùa lạnh và phòng máy lạnh.", link: { shopee: "#", lazada: "", tiktok: "#" } }
+      { id: "chong-nang", name: "Sữa chống nắng Biore UV màng nhung", img: "sk-chong-nang", prices: { tiktok: 109250 }, sold: 485182, badge: "Bán chạy", freeship: false,
+        why: "Bước quan trọng nhất của skincare. Kết cấu mỏng nhẹ, không bết, không vệt trắng.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "serum", name: "Serum KANS Niacinamide + Vitamin C", img: "sk-serum", prices: { tiktok: 321399 }, sold: 59539, badge: "", freeship: false,
+        why: "Làm sáng da, mờ thâm. Dùng buổi sáng, trước bước kem chống nắng.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "toner", name: "Toner Sơn Đoòng dưỡng ẩm, làm dịu", img: "sk-toner", prices: { tiktok: 69000 }, sold: 247918, badge: "", freeship: false,
+        why: "Cấp ẩm nhẹ, làm dịu da sau rửa mặt, không gây khô căng.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "trang-diem", name: "Bộ 14 cọ trang điểm MAANGE kèm túi", img: "sk-trang-diem", prices: { tiktok: 65000 }, sold: 243167, badge: "Đáng tiền", freeship: false,
+        why: "14 cây cọ đủ nền, phấn, mắt, môi kèm túi đựng — giá chưa bằng một cây cọ hàng hiệu.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "dau-duong", name: "Dầu dưỡng da Body oil Cami", img: "sk-dau-duong", prices: { tiktok: 169000 }, sold: 526217, badge: "", freeship: false,
+        why: "Dầu dưỡng toàn thân cấp ẩm, giúp da mềm mịn — dùng được cả mặt lẫn body, đỡ phải mua nhiều chai.", link: { shopee: "", lazada: "", tiktok: "#" } }
     ]
   },
   {
@@ -144,16 +144,16 @@ const PERSONAS = [
     needs: ["Tiết kiệm thời gian", "Nấu nhanh", "Nhà sạch"],
     skip: ["Bộ nồi chảo 10 món — ở một mình chỉ cần 1 chảo chống dính và 1 nồi.", "Máy làm sữa hạt, máy làm bánh mì — hay bị bỏ xó, thử dùng ké 1 tháng rồi hẵng mua.", "Đồ trang trí mua theo set — thêm dần theo thời gian vừa đẹp vừa ít phí."],
     products: [
-      { id: "robot", name: "Robot hút bụi lau nhà, bản đồ LiDAR, điều khiển qua app", img: "or-robot", prices: { shopee: 3990000, lazada: 4229000 }, oldPrice: 5490000, rating: 4.7, reviews: 2260, badge: "Đáng tiền", freeship: true,
+      { id: "robot", name: "Robot hút bụi lau nhà, bản đồ LiDAR, điều khiển qua app", img: "or-robot", prices: { shopee: 3990000, lazada: 4229000 }, rating: 4.7, reviews: 2260, badge: "Đáng tiền", freeship: true,
         why: "Đi làm về là nhà đã sạch. Bản đồ LiDAR giúp robot không sót góc.", link: { shopee: "#", lazada: "#", tiktok: "" } },
-      { id: "may-xay", name: "Máy xay sinh tố cối thủy tinh 1.5L, 6 lưỡi", img: "or-may-xay", prices: { shopee: 749000, lazada: 739000, tiktok: 690000 }, rating: 4.6, reviews: 1870, badge: "", freeship: true,
-        why: "Xay sinh tố, đá, hạt. Cối thủy tinh không ám mùi, dễ rửa.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
+      { id: "may-xay", name: "Máy xay sinh tố cối thủy tinh 3,5L", img: "or-may-xay", prices: { tiktok: 259000 }, sold: 76074, badge: "", freeship: false,
+        why: "Xay sinh tố, đá, hạt. Cối thủy tinh không ám mùi, dễ rửa.", link: { shopee: "", lazada: "", tiktok: "#" } },
       { id: "ca-phe", name: "Máy pha cà phê espresso mini kèm máy xay", img: "or-ca-phe", prices: { shopee: 2490000, lazada: 2539000 }, oldPrice: 2990000, rating: 4.5, reviews: 540, badge: "", freeship: true,
         why: "Tự pha ly latte buổi sáng, sau 3 tháng là hoà vốn tiền cà phê ngoài.", link: { shopee: "#", lazada: "#", tiktok: "" } },
       { id: "bat-su", name: "Bộ 6 chén sứ men mộc phong cách tối giản", img: "or-bat-su", prices: { shopee: 260000, tiktok: 279000 }, rating: 4.8, reviews: 1320, badge: "Bán chạy", freeship: true,
         why: "Men mộc dễ phối, chụp ảnh đồ ăn đẹp. Dùng được máy rửa bát.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "den-ngu", name: "Đèn ngủ đầu giường bóng tròn dây tóc, chân kim loại", img: "or-den-ngu", prices: { shopee: 349000, lazada: 359000, tiktok: 320000 }, rating: 4.6, reviews: 970, badge: "", freeship: false,
-        why: "Ánh vàng ấm, đọc sách trước khi ngủ dễ chịu, góc phòng xinh hẳn.", link: { shopee: "#", lazada: "#", tiktok: "#" } }
+      { id: "den-ngu", name: "Đèn ngủ cảm biến ánh sáng 4 màu", img: "or-den-ngu", prices: { tiktok: 27736 }, sold: 126602, badge: "", freeship: false,
+        why: "Tự bật khi trời tối, tự tắt khi sáng, 4 màu — gắn hành lang, đầu giường đều tiện, giá chưa tới 30k.", link: { shopee: "", lazada: "", tiktok: "#" } }
     ]
   },
   {
@@ -162,14 +162,14 @@ const PERSONAS = [
     needs: ["Gọn nhẹ", "Bền", "Chụp ảnh"],
     skip: ["Vali size lớn cho chuyến 3–4 ngày — vali xách tay còn đỡ được tiền ký gửi.", "Máy ảnh đắt tiền khi chỉ đi 1–2 chuyến/năm — điện thoại đời mới đã chụp rất đẹp.", "Đồ du lịch dùng một lần — chọn loại dùng lại được, đỡ tiền mà đỡ rác."],
     products: [
-      { id: "vali", name: "Vali khung nhôm 20 inch xách tay, khoá TSA", img: "dl-vali", prices: { shopee: 1719000, lazada: 1659000, tiktok: 1590000 }, oldPrice: 1990000, rating: 4.7, reviews: 1745, badge: "Bán chạy", freeship: true,
-        why: "Vừa chuẩn xách tay 7kg, bánh xe xoay 360° êm, khoá TSA khi bay quốc tế.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
+      { id: "vali", name: "Vali khung nhôm Trang Đoàn", img: "dl-vali", prices: { tiktok: 500000 }, sold: 221961, badge: "Bán chạy", freeship: false,
+        why: "Vừa chuẩn xách tay 7kg, bánh xe xoay 360° êm, khoá TSA khi bay quốc tế.", link: { shopee: "", lazada: "", tiktok: "#" } },
       { id: "balo-trek", name: "Balo trekking 40L chống nước, có áo mưa", img: "dl-balo", prices: { shopee: 709000, lazada: 690000 }, rating: 4.6, reviews: 830, badge: "", freeship: true,
         why: "Đai hông trợ lực, lưng thoáng khí — đi Hà Giang, Tà Xùa vẫn nhẹ vai.", link: { shopee: "#", lazada: "#", tiktok: "" } },
       { id: "vi-ho-chieu", name: "Ví đựng hộ chiếu chống quét RFID, da PU", img: "dl-vi-ho-chieu", prices: { shopee: 150000, tiktok: 159000 }, rating: 4.5, reviews: 2104, badge: "Đáng tiền", freeship: true,
         why: "Hộ chiếu, vé máy bay, thẻ, sim — gọn trong một ví, không thất lạc.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "kinh-ram", name: "Kính râm phân cực chống UV400 gọng vuông", img: "dl-kinh-ram", prices: { shopee: 239000, lazada: 239000, tiktok: 220000 }, oldPrice: 290000, rating: 4.4, reviews: 1560, badge: "", freeship: true,
-        why: "Đi biển, chạy xe đường dài đỡ chói, ảnh check-in cũng có gu hơn.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
+      { id: "kinh-ram", name: "Kính râm phân cực F4", img: "dl-kinh-ram", prices: { tiktok: 98999 }, sold: 361578, badge: "", freeship: false,
+        why: "Đi biển, chạy xe đường dài đỡ chói, ảnh check-in cũng có gu hơn.", link: { shopee: "", lazada: "", tiktok: "#" } },
       { id: "may-anh", name: "Máy ảnh mirrorless cho người mới kèm lens kit", img: "dl-may-anh", prices: { shopee: 13489000, lazada: 12490000 }, oldPrice: 13990000, rating: 4.8, reviews: 312, badge: "", freeship: true,
         why: "Nhẹ hơn DSLR, ảnh đẹp hơn điện thoại hẳn khi thiếu sáng — đáng đầu tư nếu đi nhiều.", link: { shopee: "#", lazada: "#", tiktok: "" } }
     ]
@@ -184,12 +184,12 @@ const PERSONAS = [
         why: "Hoa lụa không héo, chụp ảnh cưới, ăn hỏi, đãi tiệc đều dùng được — xong còn giữ làm kỷ niệm.", link: { shopee: "#", lazada: "", tiktok: "#" } },
       { id: "nhan-cuoi", name: "Cặp nhẫn cưới vàng 14K trơn, khắc tên miễn phí", img: "cd-nhan", prices: { shopee: 6490000, lazada: 6689000 }, oldPrice: 7290000, rating: 4.8, reviews: 860, badge: "Đáng tiền", freeship: true,
         why: "Kiểu trơn cổ điển, đeo hằng ngày không vướng. Nên chọn shop có giấy kiểm định và khắc tên miễn phí.", link: { shopee: "#", lazada: "#", tiktok: "" } },
-      { id: "bong-tai", name: "Bông tai bạc 925 đính đá xanh cho cô dâu", img: "cd-bong-tai", prices: { shopee: 639000, tiktok: 590000 }, rating: 4.7, reviews: 1530, badge: "", freeship: true,
-        why: "Điểm nhấn \"something blue\" cho ngày cưới. Bạc 925 không gây kích ứng, đeo cả ngày không nặng tai.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "giay-cuoi", name: "Giày cao gót mũi nhọn 7cm êm chân cho tiệc cưới", img: "cd-giay", prices: { shopee: 690000, lazada: 729000, tiktok: 749000 }, oldPrice: 850000, rating: 4.6, reviews: 2210, badge: "", freeship: true,
-        why: "Gót 7cm vừa đủ thanh lịch mà đứng chào khách cả buổi vẫn không đau chân. Lót đệm êm.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "nen-thom", name: "Set nến thơm sáp đậu nành trang trí phòng tân hôn", img: "cd-nen", prices: { shopee: 290000, tiktok: 309000 }, rating: 4.8, reviews: 3120, badge: "Bán chạy", freeship: true,
-        why: "Mùi hoa hồng, vani dịu nhẹ. Thắp trong phòng tân hôn hoặc làm quà cảm ơn phù dâu đều xinh.", link: { shopee: "#", lazada: "", tiktok: "#" } }
+      { id: "bong-tai", name: "Bông tai bạc Hà Tuấn Jewelry", img: "cd-bong-tai", prices: { tiktok: 331000 }, sold: 30570, badge: "", freeship: false,
+        why: "Bông tai bạc nhỏ xinh, đeo ngày cưới xong vẫn đeo đi làm hằng ngày được — không phí tiền.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "giay-cuoi", name: "Giày cao gót mũi nhọn đính đá Hana", img: "cd-giay", prices: { tiktok: 205000 }, sold: 68222, badge: "", freeship: false,
+        why: "Gót 7cm vừa đủ thanh lịch mà đứng chào khách cả buổi vẫn không đau chân. Lót đệm êm.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "nen-thom", name: "Lọ tỏa hương thơm phòng Lovenose", img: "cd-nen", prices: { tiktok: 52900 }, sold: 716874, badge: "Bán chạy", freeship: false,
+        why: "Thơm dịu cả căn phòng mà không cần đốt lửa — an toàn cho phòng tân hôn, làm quà cảm ơn phù dâu cũng xinh.", link: { shopee: "", lazada: "", tiktok: "#" } }
     ]
   },
   {
@@ -198,14 +198,14 @@ const PERSONAS = [
     needs: ["Sức khoẻ", "Dễ dùng", "Bền"],
     skip: ["Ghế massage toàn thân giá chục triệu — bố mẹ thường ít dùng, máy massage chân là đủ.", "Thực phẩm chức năng không rõ nguồn gốc — hỏi bác sĩ trước khi mua.", "Đồ công nghệ nhiều nút — chọn món bấm một nút là dùng được."],
     products: [
-      { id: "huyet-ap", name: "Máy đo huyết áp bắp tay, màn hình số lớn có giọng đọc", img: "bm-huyet-ap", prices: { shopee: 790000, lazada: 829000, tiktok: 859000 }, oldPrice: 950000, rating: 4.8, reviews: 3620, badge: "Bán chạy", freeship: true,
+      { id: "huyet-ap", name: "Máy đo huyết áp bắp tay, màn hình số lớn có giọng đọc", img: "bm-huyet-ap", prices: { shopee: 790000, lazada: 829000, tiktok: 859000 }, rating: 4.8, reviews: 3620, badge: "Bán chạy", freeship: true,
         why: "Số to, đọc kết quả bằng giọng nói, lưu lịch sử đo cho 2 người.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
-      { id: "tra", name: "Hộp quà trà thảo mộc 6 vị, túi lọc tiện dụng", img: "bm-tra", prices: { shopee: 359000, tiktok: 350000 }, rating: 4.7, reviews: 1104, badge: "", freeship: true,
-        why: "Hoa cúc, atiso, gừng… giúp ngủ ngon. Hộp quà đẹp, biếu dịp lễ Tết.", link: { shopee: "#", lazada: "", tiktok: "#" } },
-      { id: "am", name: "Ấm đun nước inox 304 dùng bếp từ 3L", img: "bm-am", prices: { shopee: 420000, lazada: 449000 }, rating: 4.6, reviews: 860, badge: "", freeship: false,
-        why: "Inox dày, có còi báo sôi — bố mẹ không lo quên ấm trên bếp.", link: { shopee: "#", lazada: "#", tiktok: "" } },
-      { id: "dong-ho-treo", name: "Đồng hồ treo tường số lớn, kim trôi không tiếng", img: "bm-dong-ho", prices: { shopee: 309000, lazada: 290000, tiktok: 319000 }, rating: 4.7, reviews: 1430, badge: "Đáng tiền", freeship: true,
-        why: "Số to dễ nhìn, máy kim trôi êm — không tích tắc làm mất ngủ.", link: { shopee: "#", lazada: "#", tiktok: "#" } },
+      { id: "tra", name: "Trà gừng đường nâu An Nhiên", img: "bm-tra", prices: { tiktok: 140000 }, sold: 181338, badge: "", freeship: false,
+        why: "Hoa cúc, atiso, gừng… giúp ngủ ngon. Hộp quà đẹp, biếu dịp lễ Tết.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "am", name: "Ấm siêu tốc lõi inox 304, 3,2L", img: "bm-am", prices: { tiktok: 150000 }, sold: 20376, badge: "", freeship: false,
+        why: "Ấm siêu tốc lõi inox 304, 2 lớp cách nhiệt, tự ngắt khi sôi — bố mẹ dùng an toàn.", link: { shopee: "", lazada: "", tiktok: "#" } },
+      { id: "dong-ho-treo", name: "Đồng hồ treo tường kim trôi 20cm", img: "bm-dong-ho", prices: { tiktok: 69800 }, sold: 40330, badge: "Đáng tiền", freeship: false,
+        why: "Kim trôi không tiếng tích tắc, mặt số rõ — treo phòng ngủ không làm mất giấc.", link: { shopee: "", lazada: "", tiktok: "#" } },
       { id: "hop-qua", name: "Hộp quà Tết tự chọn: hạt, trà, mứt cao cấp", img: "bm-hop-qua", prices: { shopee: 909000, tiktok: 890000 }, oldPrice: 1090000, rating: 4.6, reviews: 520, badge: "", freeship: true,
         why: "Tự chọn món theo khẩu vị bố mẹ, gói sẵn kèm thiệp viết tay.", link: { shopee: "#", lazada: "", tiktok: "#" } }
     ]

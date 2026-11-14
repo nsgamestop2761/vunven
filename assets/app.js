@@ -23,6 +23,8 @@ const imgSrc = name => /^https?:|\//.test(name) ? name : `assets/img/${name}.jpg
 const mfmt = n => n >= 1e6 ? (n / 1e6).toFixed(n % 1e6 ? 1 : 0).replace(".", ",").replace(",0", "") + " triệu" : Math.round(n / 1000) + "k";
 const kfmt = n => n >= 1000 ? (n / 1000).toFixed(1).replace(".", ",").replace(",0", "") + "k" : String(n);
 const off = p => p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+const pop = p => p.sold || p.reviews || 0;
+const rateLine = p => p.sold ? `<span>Đã bán <b>${kfmt(p.sold)}</b> trên ${SHOPS[p.bestShop] ? SHOPS[p.bestShop].name : "sàn"}</span>` : `${starHTML(p.rating)} <b>${p.rating}</b> <span>· ${kfmt(p.reviews)} đánh giá</span>`;
 const starHTML = (r, cls = "") => `<span class="stars ${cls}" aria-label="${r} trên 5 sao"><i style="width:${r / 5 * 100}%"></i></span>`;
 /* Giá tự động (assets/prices.js, do GitHub Actions cập nhật) đè lên giá nhập tay */
 const LIVE = (typeof window !== "undefined" && window.LIVE_PRICES) || { items: {} };
@@ -86,10 +88,10 @@ function productCard(p) {
     <button class="heart ${Saved.has(p.id) ? "on" : ""}" data-save="${p.id}" aria-pressed="${Saved.has(p.id)}" aria-label="Lưu ${esc(p.name)}">${ICON.heart}</button>
     <div class="pbody">
       <a class="ptitle" href="${mainHref(p)}" ${isExternal(p) ? EXT : ""}>${esc(p.name)}</a>
-      <div class="rate">${starHTML(p.rating)} <b>${p.rating}</b> <span>· ${kfmt(p.reviews)} đánh giá</span></div>
+      <div class="rate">${rateLine(p)}</div>
       <div class="price"><b>${fmt(p.price)}</b>${p.oldPrice ? `<em>-${d}%</em><s>${fmt(p.oldPrice)}</s>` : ""}</div>
       ${p.oldPrice ? `<div class="save">Tiết kiệm ${mfmt(p.oldPrice - p.price)} so với giá gốc</div>` : ""}
-      <div class="pmeta"><span>Rẻ nhất ở <b>${SHOPS[p.bestShop].name}</b></span>${p.freeship ? `<span>·</span><span class="ship">Freeship</span>` : ""}</div>
+      <div class="pmeta"><span>${p.offers.length > 1 ? "Rẻ nhất ở" : "Có trên"} <b>${SHOPS[p.bestShop].name}</b></span>${p.freeship ? `<span>·</span><span class="ship">Freeship</span>` : ""}</div>
       <a class="cmp-btn" href="${mainHref(p)}">${ICON.scale}${p.offers.length > 1 ? `So giá ${p.offers.length} sàn${gap(p) ? ` · chênh ${mfmt(gap(p))}` : ""}` : "Xem chi tiết"}</a>
     </div>
   </article>`;
@@ -99,7 +101,7 @@ function productCard(p) {
 function compareTable(p) {
   return `
   <div class="cmp-table">
-    <div class="cmp-h"><b>${ICON.scale} So giá ${p.offers.length} sàn</b><span>${p.live ? "Tự cập nhật" : "Cập nhật"} ${UPDATED_AT}</span></div>
+    <div class="cmp-h"><b>${ICON.scale} ${p.offers.length > 1 ? `So giá ${p.offers.length} sàn` : "Giá hiện tại"}</b><span>${p.live ? "Tự cập nhật" : "Cập nhật"} ${UPDATED_AT}</span></div>
     ${p.offers.map(([k, v], i) => `
     <a class="cmp-row ${i === 0 ? "best" : ""}" href="${esc(p.link[k])}" ${EXT}>
       <span class="sn">${SHOPS[k].name}${i === 0 && p.offers.length > 1 ? `<em>Rẻ nhất</em>` : ""}${p.notes && p.notes[k] ? `<small>${esc(p.notes[k])}</small>` : ""}</span>
@@ -198,7 +200,7 @@ function initHome() {
   const avg = Math.round(withOld.reduce((a, p) => a + off(p), 0) / withOld.length);
   const st = document.getElementById("avgSave"); if (st) st.textContent = avg + "%";
 
-  const best = [...ALL].filter(p => p.badge === "Bán chạy").sort((a, b) => b.reviews - a.reviews).slice(0, 10);
+  const best = [...ALL].filter(p => p.badge === "Bán chạy" || p.sold >= 100000).sort((a, b) => pop(b) - pop(a)).slice(0, 10);
   document.getElementById("bestGrid").innerHTML = best.map(productCard).join("");
 
   const deals = [...ALL].filter(p => p.oldPrice).sort((a, b) => off(b) - off(a)).slice(0, 5);
@@ -235,7 +237,7 @@ function initListing() {
     <div class="fgroup"><h3>Tuỳ chọn</h3>
       <label><input type="checkbox" name="sale"> Đang giảm giá</label>
       <label><input type="checkbox" name="ship"> Freeship</label>
-      <label><input type="checkbox" name="top"> Từ 4,7 sao trở lên</label>
+      <label><input type="checkbox" name="top"> Được tin dùng (4,7★ hoặc bán trên 50k)</label>
     </div>`;
 
   const draw = () => {
@@ -262,8 +264,8 @@ function initListing() {
       (!st.q || norm(p.name + " " + personaById(p.persona).name).includes(norm(st.q))) &&
       priceOk(st.price, p.price) &&
       (!st.shops.length || st.shops.some(k => p.link[k])) &&
-      (!st.top || p.rating >= 4.7) && (!st.ship || p.freeship) && (!st.sale || p.oldPrice));
-    const sorters = { low: (a, b) => a.price - b.price, high: (a, b) => b.price - a.price, rate: (a, b) => b.rating - a.rating || b.reviews - a.reviews, pop: (a, b) => b.reviews - a.reviews, gap: (a, b) => gap(b) - gap(a) };
+      (!st.top || p.rating >= 4.7 || p.sold >= 50000) && (!st.ship || p.freeship) && (!st.sale || p.oldPrice));
+    const sorters = { low: (a, b) => a.price - b.price, high: (a, b) => b.price - a.price, rate: (a, b) => (b.rating || 0) - (a.rating || 0) || pop(b) - pop(a), pop: (a, b) => pop(b) - pop(a), gap: (a, b) => gap(b) - gap(a) };
     if (sorters[st.sort]) list = [...list].sort(sorters[st.sort]);
     document.getElementById("resultCount").textContent = `${list.length} sản phẩm`;
     document.getElementById("listGrid").innerHTML = list.length ? list.map(productCard).join("")
@@ -305,7 +307,7 @@ function initReview() {
       <div class="buybox">
         ${p.badge ? `<span class="tag">${esc(p.badge)}</span>` : ""}
         <h1>${esc(p.name)}</h1>
-        <div class="by">${starHTML(p.rating)} <b>${p.rating}</b> <span>(${p.reviews.toLocaleString("vi-VN")} đánh giá trên sàn)</span> · <span>Vun Vén chấm <b>${r.score}/10</b></span></div>
+        <div class="by">${rateLine(p)} · <span>Vun Vén chấm <b>${r.score}/10</b></span></div>
         <div class="pricebox">
           <div class="note" style="margin:0 0 2px">Giá tốt nhất hiện tại · ${SHOPS[p.bestShop].name}</div>
           <div class="bprice"><b>${fmt(p.price)}</b>${p.oldPrice ? `<em>-${d}%</em><s>${fmt(p.oldPrice)}</s>` : ""}</div>
@@ -387,7 +389,7 @@ function initProduct() {
       <div class="buybox">
         ${p.badge ? `<span class="tag">${esc(p.badge)}</span>` : ""}
         <h1>${esc(p.name)}</h1>
-        <div class="by">${starHTML(p.rating)} <b>${p.rating}</b> <span>(${p.reviews.toLocaleString("vi-VN")} đánh giá trên sàn)</span></div>
+        <div class="by">${rateLine(p)}</div>
         <div class="pricebox">
           <div class="note" style="margin:0 0 2px">Giá tốt nhất hiện tại · ${SHOPS[p.bestShop].name}</div>
           <div class="bprice"><b>${fmt(p.price)}</b>${p.oldPrice ? `<em>-${d}%</em><s>${fmt(p.oldPrice)}</s>` : ""}</div>
