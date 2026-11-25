@@ -26,7 +26,7 @@ const off = p => p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
 const pop = p => p.sold || p.reviews || 0;
 const rateLine = p => p.sold ? `<span>Đã bán <b>${kfmt(p.sold)}</b> trên ${SHOPS[p.bestShop] ? SHOPS[p.bestShop].name : "sàn"}</span>` : `${starHTML(p.rating)} <b>${p.rating}</b> <span>· ${kfmt(p.reviews)} đánh giá</span>`;
 const starHTML = (r, cls = "") => `<span class="stars ${cls}" aria-label="${r} trên 5 sao"><i style="width:${r / 5 * 100}%"></i></span>`;
-/* Giá tự động (assets/prices.js, do GitHub Actions cập nhật) đè lên giá nhập tay */
+/* Giá từ assets/prices.js (do scripts/update-prices.mjs tạo) đè lên giá nhập tay */
 const LIVE = (typeof window !== "undefined" && window.LIVE_PRICES) || { items: {} };
 const UPDATED_AT = LIVE.updatedAt ? (() => { const [d, t] = LIVE.updatedAt.split("T"); const [y, m, dd] = d.split("-"); return `${t.slice(0, 5)} ${dd}/${m}/${y}`; })() : PRICE_UPDATED;
 PERSONAS.forEach(per => per.products.forEach(p => {
